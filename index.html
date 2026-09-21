@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>JARVIS // Dual Study Engine & Convergence Lab (v3.1 Master Edition)</title>
+  <title>JARVIS // Dual Study Engine & Convergence Lab (v3.2 Fixed)</title>
   
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -84,7 +84,7 @@
         <div>
           <div class="orbitron font-bold text-lg tracking-wider gold-gradient-text flex items-center space-x-2">
             <span>JARVIS // DUAL NEXUS</span>
-            <span class="text-[9px] uppercase px-2 py-0.5 bg-yellow-500/20 text-yellow-400 border border-yellow-500/30 rounded font-mono">v3.1 MASTER</span>
+            <span class="text-[9px] uppercase px-2 py-0.5 bg-yellow-500/20 text-yellow-400 border border-yellow-500/30 rounded font-mono">v3.2 ONLINE</span>
           </div>
           <p class="text-[11px] text-gray-400">Radiological Sciences &times; Healthcare AI & Automation</p>
         </div>
@@ -251,7 +251,7 @@
           <!-- Terminal Monitor -->
           <div class="lg:col-span-2 bg-[#08090c] border border-yellow-500/30 rounded-xl p-4 font-mono text-xs text-gray-300 h-72 overflow-y-auto flex flex-col justify-between" id="conv-terminal">
             <div id="conv-log" class="space-y-1">
-              <span class="text-gray-500">// JARVIS Convergence Diagnostic Sandbox v3.1</span><br/>
+              <span class="text-gray-500">// JARVIS Convergence Diagnostic Sandbox v3.2</span><br/>
               <span class="text-yellow-400">> System standing by. Configure clinical target and trigger inference.</span>
             </div>
             <div class="text-[10px] text-gray-500 border-t border-gray-800 pt-2 flex flex-wrap justify-between gap-2 mt-4 font-mono">
@@ -295,7 +295,7 @@
        ACADEMIC CURRICULUM REGISTRY (14 COURSES)
        ========================================================================= */
     const courses = [
-      // 1. RAD-101: Radiation Physics & Technique (MASTER EDITION)
+      // 1. RAD-101: Radiation Physics & Technique
       {
         id: "rad_101",
         stream: "rad",
@@ -304,7 +304,6 @@
         icon: "fa-sliders",
         summary: "Master Bremsstrahlung vs. Characteristic physics, the 15% rule, inverse/direct square laws, anti-scatter grids, and focal spot blur.",
         content: `
-          <!-- SECTION 1: CORE INTUITION -->
           <div class="bg-[#12141d] p-4 rounded-xl border border-yellow-500/30">
             <h4 class="text-yellow-400 font-bold mb-1 text-sm flex items-center">
               <i class="fa-solid fa-lightbulb mr-2 text-yellow-500"></i>1. Core Intuition (The Plain-English Concept)
@@ -318,7 +317,6 @@
             </p>
           </div>
 
-          <!-- SECTION 2: FORMULAS & RULES -->
           <div class="bg-[#12141d] p-4 rounded-xl border border-yellow-500/30">
             <h4 class="text-yellow-400 font-bold mb-2 text-sm flex items-center">
               <i class="fa-solid fa-square-root-variable mr-2 text-yellow-500"></i>2. Exact Scientific Formulas & Rules
@@ -348,7 +346,6 @@
             </div>
           </div>
 
-          <!-- SECTION 3: WORKED PRACTICE PROBLEMS -->
           <div class="bg-[#12141d] p-4 rounded-xl border border-yellow-500/30">
             <h4 class="text-yellow-400 font-bold mb-2 text-sm flex items-center">
               <i class="fa-solid fa-calculator mr-2 text-yellow-500"></i>3. Step-by-Step Worked Practice Problems
@@ -374,7 +371,6 @@
             </div>
           </div>
 
-          <!-- SECTION 4: TRAPS & PITFALLS -->
           <div class="bg-[#12141d] p-4 rounded-xl border border-rose-500/30">
             <h4 class="text-rose-400 font-bold mb-2 text-sm flex items-center">
               <i class="fa-solid fa-triangle-exclamation mr-2 text-rose-500"></i>4. Common Traps & Clinical Pitfalls
@@ -387,7 +383,7 @@
         `
       },
 
-      // 2. RAD-102: Patient Care & Pharmacology (MASTER EDITION)
+      // 2. RAD-102: Patient Care & Pharmacology
       {
         id: "rad_102",
         stream: "rad",
@@ -396,7 +392,6 @@
         icon: "fa-hospital-user",
         summary: "Emergency contrast triage ladder, IM Epinephrine dosing, vasovagal bradycardia protocols, and infection control precautions.",
         content: `
-          <!-- SECTION 1: CORE INTUITION -->
           <div class="bg-[#12141d] p-4 rounded-xl border border-yellow-500/30">
             <h4 class="text-yellow-400 font-bold mb-1 text-sm flex items-center">
               <i class="fa-solid fa-lightbulb mr-2 text-yellow-500"></i>1. Core Intuition (The Plain-English Concept)
@@ -408,7 +403,6 @@
             </p>
           </div>
 
-          <!-- SECTION 2: FORMULAS & CLINICAL PROTOCOLS -->
           <div class="bg-[#12141d] p-4 rounded-xl border border-yellow-500/30">
             <h4 class="text-yellow-400 font-bold mb-2 text-sm flex items-center">
               <i class="fa-solid fa-kit-medical mr-2 text-yellow-500"></i>2. Contrast Reaction Triage Ladder
@@ -448,7 +442,6 @@
             </div>
           </div>
 
-          <!-- SECTION 3: WORKED CASE STUDIES -->
           <div class="bg-[#12141d] p-4 rounded-xl border border-yellow-500/30">
             <h4 class="text-yellow-400 font-bold mb-2 text-sm flex items-center">
               <i class="fa-solid fa-notes-medical mr-2 text-yellow-500"></i>3. Step-by-Step Worked Clinical Case Studies
@@ -465,7 +458,6 @@
             </div>
           </div>
 
-          <!-- SECTION 4: TRAPS & PITFALLS -->
           <div class="bg-[#12141d] p-4 rounded-xl border border-rose-500/30">
             <h4 class="text-rose-400 font-bold mb-2 text-sm flex items-center">
               <i class="fa-solid fa-triangle-exclamation mr-2 text-rose-500"></i>4. Common Traps & Clinical Pitfalls
@@ -640,7 +632,7 @@
         `
       },
 
-      // 10. AI-101: Medical Data Science with Python (MASTER EDITION)
+      // 10. AI-101: Medical Data Science with Python
       {
         id: "ai_101",
         stream: "ai",
@@ -649,7 +641,6 @@
         icon: "fa-brands fa-python",
         summary: "PyDICOM header parsing, vectorized Hounsfield Unit conversion, clinical windowing math, and SIMD performance optimization.",
         content: `
-          <!-- SECTION 1: CORE INTUITION -->
           <div class="bg-[#12141d] p-4 rounded-xl border border-yellow-500/30">
             <h4 class="text-yellow-400 font-bold mb-1 text-sm flex items-center">
               <i class="fa-solid fa-lightbulb mr-2 text-yellow-500"></i>1. Core Intuition (The Plain-English Concept)
@@ -662,7 +653,6 @@
             </p>
           </div>
 
-          <!-- SECTION 2: FORMULAS & PYTHON MATH -->
           <div class="bg-[#12141d] p-4 rounded-xl border border-yellow-500/30">
             <h4 class="text-yellow-400 font-bold mb-2 text-sm flex items-center">
               <i class="fa-solid fa-code mr-2 text-yellow-500"></i>2. Exact Scientific Formulas & Clinical Windows
@@ -689,7 +679,6 @@
             </div>
           </div>
 
-          <!-- SECTION 3: WORKED PYTHON CODE -->
           <div class="bg-[#12141d] p-4 rounded-xl border border-yellow-500/30">
             <h4 class="text-yellow-400 font-bold mb-2 text-sm flex items-center">
               <i class="fa-solid fa-terminal mr-2 text-yellow-500"></i>3. Production-Grade Vectorized Code
@@ -720,13 +709,12 @@ def load_and_window_dicom(filepath, wl=40.0, ww=80.0):
     return normalized</pre>
           </div>
 
-          <!-- SECTION 4: TRAPS & PITFALLS -->
           <div class="bg-[#12141d] p-4 rounded-xl border border-rose-500/30">
             <h4 class="text-rose-400 font-bold mb-2 text-sm flex items-center">
               <i class="fa-solid fa-triangle-exclamation mr-2 text-rose-500"></i>4. Common Traps & Programming Pitfalls
             </h4>
             <ul class="list-disc pl-5 space-y-1.5 text-xs text-gray-300">
-              <li><strong>The uint16 Underflow Disaster:</strong> Raw DICOM pixels are stored as unsigned 16-bit integers (`uint16`). If `RescaleIntercept` is -1024, calculating `pixel + (-1024)` on a `uint16` array causes integer underflow wraparound (`0 - 1024 = 64512`). Always cast to `np.float32` first!</li>
+              <li><strong>The uint16 Underflow Disaster:</strong> Raw DICOM pixels are stored as unsigned 16-bit integers (<code>uint16</code>). If <code>RescaleIntercept</code> is -1024, calculating <code>pixel + (-1024)</code> on a <code>uint16</code> array causes integer underflow wraparound (<code>0 - 1024 = 64512</code>). Always cast to <code>np.float32</code> first!</li>
               <li><strong>The Python For-Loop Slowness:</strong> Iterating over a 512x512x200 volume with nested Python loops takes ~10 seconds. NumPy SIMD vectorization executes in 3 milliseconds (~3,000&times; faster).</li>
             </ul>
           </div>

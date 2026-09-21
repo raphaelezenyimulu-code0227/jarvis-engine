@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>JARVIS // Dual Study Engine & Convergence Lab (v3.0 Ultra)</title>
+  <title>JARVIS // Dual Study Engine & Convergence Lab (v3.1 Master Edition)</title>
   
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -84,7 +84,7 @@
         <div>
           <div class="orbitron font-bold text-lg tracking-wider gold-gradient-text flex items-center space-x-2">
             <span>JARVIS // DUAL NEXUS</span>
-            <span class="text-[9px] uppercase px-2 py-0.5 bg-yellow-500/20 text-yellow-400 border border-yellow-500/30 rounded font-mono">v3.0 ULTRA</span>
+            <span class="text-[9px] uppercase px-2 py-0.5 bg-yellow-500/20 text-yellow-400 border border-yellow-500/30 rounded font-mono">v3.1 MASTER</span>
           </div>
           <p class="text-[11px] text-gray-400">Radiological Sciences &times; Healthcare AI & Automation</p>
         </div>
@@ -251,7 +251,7 @@
           <!-- Terminal Monitor -->
           <div class="lg:col-span-2 bg-[#08090c] border border-yellow-500/30 rounded-xl p-4 font-mono text-xs text-gray-300 h-72 overflow-y-auto flex flex-col justify-between" id="conv-terminal">
             <div id="conv-log" class="space-y-1">
-              <span class="text-gray-500">// JARVIS Convergence Diagnostic Sandbox v3.0</span><br/>
+              <span class="text-gray-500">// JARVIS Convergence Diagnostic Sandbox v3.1</span><br/>
               <span class="text-yellow-400">> System standing by. Configure clinical target and trigger inference.</span>
             </div>
             <div class="text-[10px] text-gray-500 border-t border-gray-800 pt-2 flex flex-wrap justify-between gap-2 mt-4 font-mono">
@@ -295,66 +295,186 @@
        ACADEMIC CURRICULUM REGISTRY (14 COURSES)
        ========================================================================= */
     const courses = [
-      // 1. RAD-101: Radiation Physics & Technique
+      // 1. RAD-101: Radiation Physics & Technique (MASTER EDITION)
       {
         id: "rad_101",
         stream: "rad",
         title: "RAD-101: Radiation Physics & Exposure Dynamics",
         badge: "Physics Foundation",
         icon: "fa-sliders",
-        summary: "Bremsstrahlung vs. Characteristic radiation, 15% kVp rule, anti-scatter grid factors, and geometric unsharpness.",
+        summary: "Master Bremsstrahlung vs. Characteristic physics, the 15% rule, inverse/direct square laws, anti-scatter grids, and focal spot blur.",
         content: `
-          <h4 class="text-yellow-400 font-bold mb-2 text-sm">1. Production of X-Rays: Bremsstrahlung vs. Characteristic</h4>
-          <p>X-rays are produced when high-velocity electrons decelerate near target tungsten nuclei (Bremsstrahlung, continuous spectrum accounting for ~80-90% of beam) or eject K-shell orbital electrons (Characteristic, discrete emission spikes at 69.5 keV for Tungsten target).</p>
-
-          <h4 class="text-yellow-400 font-bold mt-4 mb-2 text-sm">2. The 15% kVp Rule & Exposure Dynamics</h4>
-          <p>A 15% increase in kVp doubles image receptor exposure, equivalent to doubling the mAs. To minimize patient dose while preserving receptor exposure:</p>
-          <div class="bg-black/60 p-2.5 rounded border border-yellow-500/20 font-mono text-yellow-300 my-2">
-            Patient Dose Reduction = Increase kVp by 15% & Decrease mAs by 50%
+          <!-- SECTION 1: CORE INTUITION -->
+          <div class="bg-[#12141d] p-4 rounded-xl border border-yellow-500/30">
+            <h4 class="text-yellow-400 font-bold mb-1 text-sm flex items-center">
+              <i class="fa-solid fa-lightbulb mr-2 text-yellow-500"></i>1. Core Intuition (The Plain-English Concept)
+            </h4>
+            <p class="text-gray-300 text-xs leading-relaxed">
+              <strong>Making X-Rays:</strong> Think of firing electrons at a massive tungsten wall. 99% of their kinetic energy turns into heat, and only 1% produces X-ray photons. 
+              <em>Bremsstrahlung ("braking radiation")</em> happens when an electron slows down and swerves around a tungsten nucleus, emitting continuous-spectrum photons. 
+              <em>Characteristic radiation</em> occurs when an electron knocks out an inner K-shell electron; an outer electron drops in to fill the hole, producing a discrete spike at 69.5 keV.<br><br>
+              <strong>kVp vs. mAs:</strong> <em>kVp</em> is the speed and penetrating power (quality). <em>mAs</em> is the total number of photons fired (quantity). 
+              <strong>Scatter:</strong> Photons bouncing off patient tissues like headlights in dense fog create a gray haze (Compton scatter). Anti-scatter grids act like window blinds, absorbing angled scatter while letting straight, image-forming photons reach the receptor.
+            </p>
           </div>
 
-          <h4 class="text-yellow-400 font-bold mt-4 mb-2 text-sm">3. Anti-Scatter Grids & Bucky Factors</h4>
-          <p>Indicated when anatomical thickness exceeds 10 cm or tube potential > 70 kVp. Formula: <code>mAs2 = mAs1 &times; (GCF2 / GCF1)</code>.</p>
-          <ul class="list-disc pl-5 space-y-1 text-gray-300">
-            <li>No Grid: GCF = 1</li>
-            <li>5:1 Grid: GCF = 2</li>
-            <li>6:1 Grid: GCF = 3</li>
-            <li>8:1 Grid: GCF = 4</li>
-            <li>12:1 Grid: GCF = 5</li>
-            <li>16:1 Grid: GCF = 6</li>
-          </ul>
+          <!-- SECTION 2: FORMULAS & RULES -->
+          <div class="bg-[#12141d] p-4 rounded-xl border border-yellow-500/30">
+            <h4 class="text-yellow-400 font-bold mb-2 text-sm flex items-center">
+              <i class="fa-solid fa-square-root-variable mr-2 text-yellow-500"></i>2. Exact Scientific Formulas & Rules
+            </h4>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-3 font-mono text-[11px]">
+              <div class="bg-black/60 p-2.5 rounded border border-gray-800">
+                <span class="text-yellow-400 font-bold">Inverse Square Law (Dose):</span><br/>
+                I1 / I2 = (d2 / d1)^2
+              </div>
+              <div class="bg-black/60 p-2.5 rounded border border-gray-800">
+                <span class="text-yellow-400 font-bold">Direct Square Law (mAs):</span><br/>
+                mAs1 / mAs2 = (SID1 / SID2)^2
+              </div>
+              <div class="bg-black/60 p-2.5 rounded border border-gray-800">
+                <span class="text-yellow-400 font-bold">Grid Conversion Factor (GCF):</span><br/>
+                mAs2 = mAs1 &times; (GCF2 / GCF1)<br/>
+                <span class="text-gray-500 text-[10px]">No grid: 1 | 5:1: 2 | 6:1: 3 | 8:1: 4 | 12:1: 5 | 16:1: 6</span>
+              </div>
+              <div class="bg-black/60 p-2.5 rounded border border-gray-800">
+                <span class="text-yellow-400 font-bold">Focal Spot Blur (FSB):</span><br/>
+                FSB = Effective Focal Spot &times; (OID / SOD)<br/>
+                <span class="text-gray-500 text-[10px]">where SOD = SID - OID</span>
+              </div>
+            </div>
+            <div class="mt-3 bg-yellow-500/10 p-2.5 rounded border border-yellow-500/30 text-yellow-300 text-xs">
+              <strong>The 15% kVp Rule (ALARA Principle):</strong> Increasing kVp by 15% doubles receptor exposure. To cut patient dose by ~50% while preserving optical density: <em>Increase kVp by 15% and decrease mAs by 50%</em>.
+            </div>
+          </div>
 
-          <h4 class="text-yellow-400 font-bold mt-4 mb-2 text-sm">4. Geometric Unsharpness (Focal Spot Blur)</h4>
-          <p><code>FSB = Effective Focal Spot &times; (OID / SOD)</code>. To maximize spatial resolution: minimize OID (object-to-image distance), maximize SID (source-to-image distance), and utilize fractional focal spots (0.6 mm vs 1.2 mm).</p>
+          <!-- SECTION 3: WORKED PRACTICE PROBLEMS -->
+          <div class="bg-[#12141d] p-4 rounded-xl border border-yellow-500/30">
+            <h4 class="text-yellow-400 font-bold mb-2 text-sm flex items-center">
+              <i class="fa-solid fa-calculator mr-2 text-yellow-500"></i>3. Step-by-Step Worked Practice Problems
+            </h4>
+            <div class="space-y-3 text-xs">
+              <div class="p-3 bg-black/50 rounded-lg border border-gray-800">
+                <p class="font-bold text-gray-200 mb-1">Problem A: Distance & Exposure Maintenance</p>
+                <p class="text-gray-400 mb-2">A mobile AP chest radiograph at 100 cm SID uses 80 kVp and 4 mAs. The patient is moved to a bay where space allows a full 180 cm SID. What new mAs maintains identical receptor exposure?</p>
+                <p class="text-yellow-300 font-mono text-[11px]">
+                  1. Ratio = 180 / 100 = 1.8<br/>
+                  2. Square ratio = 1.8^2 = 3.24<br/>
+                  3. New mAs = 4 &times; 3.24 = <strong>12.96 mAs (~13 mAs)</strong>
+                </p>
+              </div>
+
+              <div class="p-3 bg-black/50 rounded-lg border border-gray-800">
+                <p class="font-bold text-gray-200 mb-1">Problem B: Grid Transition Calculation</p>
+                <p class="text-gray-400 mb-2">A knee radiograph taken non-grid at 60 kVp and 2.5 mAs requires repeat with an 8:1 grid (GCF = 4) due to patient size. Calculate new mAs.</p>
+                <p class="text-yellow-300 font-mono text-[11px]">
+                  mAs2 = 2.5 &times; (4 / 1) = <strong>10 mAs</strong>.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- SECTION 4: TRAPS & PITFALLS -->
+          <div class="bg-[#12141d] p-4 rounded-xl border border-rose-500/30">
+            <h4 class="text-rose-400 font-bold mb-2 text-sm flex items-center">
+              <i class="fa-solid fa-triangle-exclamation mr-2 text-rose-500"></i>4. Common Traps & Clinical Pitfalls
+            </h4>
+            <ul class="list-disc pl-5 space-y-1.5 text-xs text-gray-300">
+              <li><strong>Inverse Square vs. Direct Square Trap:</strong> Use <em>Inverse Square</em> to calculate radiation dose/intensity (doubling distance cuts dose to 1/4). Use <em>Direct Square</em> to calculate mAs technique (doubling distance requires 4&times; mAs).</li>
+              <li><strong>Upside-Down Focused Grid Disaster:</strong> Placing a focused grid upside down passes the central ray but absorbs the angled beam at the periphery, leaving the radiograph dark in the center and totally white/blank on both edges.</li>
+            </ul>
+          </div>
         `
       },
 
-      // 2. RAD-102: Patient Care & Pharmacology
+      // 2. RAD-102: Patient Care & Pharmacology (MASTER EDITION)
       {
         id: "rad_102",
         stream: "rad",
         title: "RAD-102: Hospital Practice, Patient Care & Contrast Pharmacology",
         badge: "Clinical Nursing",
         icon: "fa-hospital-user",
-        summary: "Transmission-based precautions, adverse iodinated contrast reactions, emergency IM Epinephrine, and extravasation.",
+        summary: "Emergency contrast triage ladder, IM Epinephrine dosing, vasovagal bradycardia protocols, and infection control precautions.",
         content: `
-          <h4 class="text-yellow-400 font-bold mb-2 text-sm">1. Transmission-Based Infection Control</h4>
-          <ul class="list-disc pl-5 space-y-1 text-gray-300">
-            <li><strong>Contact:</strong> MRSA, C. difficile (spores require handwashing with soap and water; alcohol rub is ineffective).</li>
-            <li><strong>Droplet:</strong> Influenza, Neisseria meningitidis (surgical mask within 2 meters).</li>
-            <li><strong>Airborne:</strong> Mycobacterium tuberculosis, measles, varicella (negative pressure room, N95/FFP3 respirator).</li>
-          </ul>
+          <!-- SECTION 1: CORE INTUITION -->
+          <div class="bg-[#12141d] p-4 rounded-xl border border-yellow-500/30">
+            <h4 class="text-yellow-400 font-bold mb-1 text-sm flex items-center">
+              <i class="fa-solid fa-lightbulb mr-2 text-yellow-500"></i>1. Core Intuition (The Plain-English Concept)
+            </h4>
+            <p class="text-gray-300 text-xs leading-relaxed">
+              <strong>Why Contrast Works:</strong> Blood vessels and soft tissues have similar radiopacity. High-Z iodinated contrast (Z=53) opacifies the vascular tree and tumors. 
+              Because contrast media are hyperosmolar, warm flushing and metallic taste are normal physiological responses. However, mast-cell degranulation can trigger an <em>anaphylactoid reaction</em>, while intense anxiety or pain can trigger a <em>vasovagal syncope</em>.<br><br>
+              <strong>Infection Transmission:</strong> Standard precautions apply to all body fluids. Hand hygiene with soap and water is mandatory for spore-forming pathogens like <em>C. diff</em> because alcohol-based rubs cannot penetrate spore coats.
+            </p>
+          </div>
 
-          <h4 class="text-yellow-400 font-bold mt-4 mb-2 text-sm">2. Acute Contrast Reaction Management</h4>
-          <ul class="list-disc pl-5 space-y-1.5 text-gray-300">
-            <li><strong>Mild:</strong> Limited hives, pruritus, nasal congestion. Action: Close monitoring, reassurance.</li>
-            <li><strong>Moderate:</strong> Widespread urticaria, facial edema without stridor, mild bronchospasm. Action: Diphenhydramine 25-50 mg IV/oral, close vitals monitoring.</li>
-            <li><strong>Severe / Anaphylactoid:</strong> Laryngeal stridor, profound hypotension, hypoxia. Action: <strong>Epinephrine 1:1,000 (0.3 - 0.5 mg IM)</strong> anterolateral thigh immediately; high-flow O2 (10-15 L/min), rapid IV fluid bolus, call Emergency Code.</li>
-            <li><strong>Vasovagal Reaction:</strong> Hypotension paired with <strong>BRADYCARDIA</strong> (HR < 60 bpm). Action: Trendelenburg positioning (elevate feet 30°), IV fluids, Atropine 0.5 - 1.0 mg IV if refractory.</li>
-          </ul>
+          <!-- SECTION 2: FORMULAS & CLINICAL PROTOCOLS -->
+          <div class="bg-[#12141d] p-4 rounded-xl border border-yellow-500/30">
+            <h4 class="text-yellow-400 font-bold mb-2 text-sm flex items-center">
+              <i class="fa-solid fa-kit-medical mr-2 text-yellow-500"></i>2. Contrast Reaction Triage Ladder
+            </h4>
+            <div class="overflow-x-auto">
+              <table class="w-full text-left text-[11px] border border-gray-800">
+                <thead class="bg-black/70 text-yellow-400 font-bold">
+                  <tr>
+                    <th class="p-2 border-b border-gray-800">Severity</th>
+                    <th class="p-2 border-b border-gray-800">Symptoms</th>
+                    <th class="p-2 border-b border-gray-800">Immediate Action</th>
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-gray-800 text-gray-300">
+                  <tr>
+                    <td class="p-2 font-bold text-gray-200">Mild</td>
+                    <td class="p-2">Scattered urticaria, pruritus, rhinorrhea</td>
+                    <td class="p-2">Observation, reassurance, monitor vitals 20-30 min.</td>
+                  </tr>
+                  <tr>
+                    <td class="p-2 font-bold text-amber-300">Moderate</td>
+                    <td class="p-2">Diffuse erythema, facial edema without stridor, wheezing</td>
+                    <td class="p-2">Diphenhydramine 25-50 mg IV/oral; Albuterol inhaler for wheeze.</td>
+                  </tr>
+                  <tr>
+                    <td class="p-2 font-bold text-rose-400">Severe Anaphylaxis</td>
+                    <td class="p-2">Laryngeal stridor, hypoxia, BP &lt; 90 with <strong>TACHYCARDIA</strong></td>
+                    <td class="p-2 text-rose-300 font-bold">Epinephrine 1:1,000 (0.3 - 0.5 mg IM) anterolateral thigh + High-flow O2 + Rapid Response.</td>
+                  </tr>
+                  <tr>
+                    <td class="p-2 font-bold text-cyan-300">Vasovagal Syncope</td>
+                    <td class="p-2">Diaphoresis, fainting, BP &lt; 90 with <strong>BRADYCARDIA (HR &lt; 60)</strong></td>
+                    <td class="p-2 text-cyan-300 font-bold">Trendelenburg position (feet elevated 30&deg;), IV fluids; Atropine 0.5 - 1.0 mg IV if HR &lt; 50.</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
 
-          <h4 class="text-yellow-400 font-bold mt-4 mb-2 text-sm">3. Extravasation Protocol</h4>
-          <p>Stop injection immediately. Elevate the affected limb above the level of the heart. Apply cold compresses to reduce local edema and pain. Notify the attending radiologist and observe for compartment syndrome.</p>
+          <!-- SECTION 3: WORKED CASE STUDIES -->
+          <div class="bg-[#12141d] p-4 rounded-xl border border-yellow-500/30">
+            <h4 class="text-yellow-400 font-bold mb-2 text-sm flex items-center">
+              <i class="fa-solid fa-notes-medical mr-2 text-yellow-500"></i>3. Step-by-Step Worked Clinical Case Studies
+            </h4>
+            <div class="p-3 bg-black/50 rounded-lg border border-gray-800 text-xs">
+              <p class="font-bold text-gray-200 mb-1">Case A: The Collapsed Patient Triage</p>
+              <p class="text-gray-400 mb-2">Post-CT chest contrast, a 45-year-old male collapses. Monitor shows BP 80/45 mmHg and Heart Rate 42 bpm. Differentiate and treat.</p>
+              <div class="text-yellow-300 font-mono text-[11px] space-y-1">
+                <p>1. <strong>Evaluation:</strong> Hypotension paired with <strong>severe bradycardia (42 bpm)</strong> = Vasovagal Syncope (anaphylaxis causes tachycardia).</p>
+                <p>2. <strong>Action:</strong> Immediately place in Trendelenburg position (feet elevated 30&deg;). Open IV fluids wide. Administer O2.</p>
+                <p>3. <strong>Pharmacology:</strong> If heart rate does not rebound >50 bpm within 1-2 minutes, administer <strong>Atropine 0.5 - 1.0 mg IV</strong>.</p>
+                <p>4. <em>Do NOT give Epinephrine</em> (can trigger severe arrhythmias in an uncomplicated vasovagal event).</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- SECTION 4: TRAPS & PITFALLS -->
+          <div class="bg-[#12141d] p-4 rounded-xl border border-rose-500/30">
+            <h4 class="text-rose-400 font-bold mb-2 text-sm flex items-center">
+              <i class="fa-solid fa-triangle-exclamation mr-2 text-rose-500"></i>4. Common Traps & Clinical Pitfalls
+            </h4>
+            <ul class="list-disc pl-5 space-y-1.5 text-xs text-gray-300">
+              <li><strong>The Epinephrine Route Trap:</strong> Epinephrine <strong>1:1,000</strong> is strictly for <strong>Intramuscular (IM)</strong> injection into the thigh. Never give 1:1,000 IV push; it can cause fatal arrhythmias. (IV cardiac arrest dilution is 1:10,000).</li>
+              <li><strong>The Extravasation Heat Trap:</strong> If IV contrast extravasates into tissue, <strong>apply cold compresses</strong>, not heat. Cold causes vasoconstriction and limits edema; heat causes vasodilation, increasing compartment pressure.</li>
+            </ul>
+          </div>
         `
       },
 
@@ -520,36 +640,96 @@
         `
       },
 
-      // 10. AI-101: Medical Data Science with Python
+      // 10. AI-101: Medical Data Science with Python (MASTER EDITION)
       {
         id: "ai_101",
         stream: "ai",
         title: "AI-101: Medical Data Science & Vectorized Python",
         badge: "Programming",
         icon: "fa-brands fa-python",
-        summary: "High-performance NumPy SIMD array manipulation, PyDICOM header parsing, Hounsfield Unit conversion, and windowing.",
+        summary: "PyDICOM header parsing, vectorized Hounsfield Unit conversion, clinical windowing math, and SIMD performance optimization.",
         content: `
-          <h4 class="text-yellow-400 font-bold mb-2 text-sm">1. High-Performance DICOM Manipulation with PyDICOM & NumPy</h4>
-          <p>Avoid looping over pixel arrays in Python. Always use vectorized C-level operations:</p>
-          <pre class="bg-black/80 p-3 rounded border border-yellow-500/20 text-yellow-300 font-mono text-[11px] overflow-x-auto">
+          <!-- SECTION 1: CORE INTUITION -->
+          <div class="bg-[#12141d] p-4 rounded-xl border border-yellow-500/30">
+            <h4 class="text-yellow-400 font-bold mb-1 text-sm flex items-center">
+              <i class="fa-solid fa-lightbulb mr-2 text-yellow-500"></i>1. Core Intuition (The Plain-English Concept)
+            </h4>
+            <p class="text-gray-300 text-xs leading-relaxed">
+              <strong>A DICOM is Not a Picture:</strong> A <code>.dcm</code> file is an encapsulation of patient metadata, acquisition geometry, and a raw integer array. 
+              Raw detector integers vary by manufacturer; they must be calibrated to <strong>Hounsfield Units (HU)</strong>, where water is 0 HU, air is -1000 HU, and bone is +1000 HU.<br><br>
+              <strong>Why We Window:</strong> Human eyes can only see ~30-50 shades of gray, but CT scanners capture >4000 density levels. 
+              <strong>Windowing</strong> stretches a narrow range of interest (e.g., 0 to 80 HU for brain tissue) across all 256 display grayscales, exposing early ischemic stroke signs that would otherwise be invisible.
+            </p>
+          </div>
+
+          <!-- SECTION 2: FORMULAS & PYTHON MATH -->
+          <div class="bg-[#12141d] p-4 rounded-xl border border-yellow-500/30">
+            <h4 class="text-yellow-400 font-bold mb-2 text-sm flex items-center">
+              <i class="fa-solid fa-code mr-2 text-yellow-500"></i>2. Exact Scientific Formulas & Clinical Windows
+            </h4>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-3 font-mono text-[11px]">
+              <div class="bg-black/60 p-2.5 rounded border border-gray-800">
+                <span class="text-yellow-400 font-bold">Pixel to HU Calibration:</span><br/>
+                HU = (Pixel &times; RescaleSlope) + RescaleIntercept
+              </div>
+              <div class="bg-black/60 p-2.5 rounded border border-gray-800">
+                <span class="text-yellow-400 font-bold">Windowing Bounds:</span><br/>
+                Lower = WL - (WW / 2)<br/>
+                Upper = WL + (WW / 2)
+              </div>
+            </div>
+            <div class="mt-3 text-xs text-gray-300">
+              <span class="text-yellow-400 font-bold">Standard Clinical Presets:</span>
+              <ul class="list-disc pl-5 mt-1 space-y-0.5 text-[11px]">
+                <li><strong>Brain (Stroke):</strong> WL: +40, WW: 80 (Range: 0 to 80 HU)</li>
+                <li><strong>Bone:</strong> WL: +400, WW: 1500 (Range: -350 to +1150 HU)</li>
+                <li><strong>Lung:</strong> WL: -600, WW: 1500 (Range: -1350 to +150 HU)</li>
+                <li><strong>Soft Tissue:</strong> WL: +50, WW: 350 (Range: -125 to +225 HU)</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- SECTION 3: WORKED PYTHON CODE -->
+          <div class="bg-[#12141d] p-4 rounded-xl border border-yellow-500/30">
+            <h4 class="text-yellow-400 font-bold mb-2 text-sm flex items-center">
+              <i class="fa-solid fa-terminal mr-2 text-yellow-500"></i>3. Production-Grade Vectorized Code
+            </h4>
+            <pre class="bg-black/80 p-3 rounded border border-yellow-500/20 text-yellow-300 font-mono text-[11px] overflow-x-auto">
 import pydicom
 import numpy as np
 
-# Load DICOM dataset
-dcm = pydicom.dcmread("patient_ct.dcm")
-pixel_array = dcm.pixel_array.astype(np.float32)
+def load_and_window_dicom(filepath, wl=40.0, ww=80.0):
+    # 1. Read DICOM
+    ds = pydicom.dcmread(filepath)
+    
+    # 2. Prevent uint16 underflow by casting to float32
+    raw = ds.pixel_array.astype(np.float32)
+    
+    # 3. Vectorized HU conversion
+    slope = float(getattr(ds, 'RescaleSlope', 1.0))
+    intercept = float(getattr(ds, 'RescaleIntercept', 0.0))
+    hu = (raw * slope) + intercept
+    
+    # 4. Vectorized window clipping
+    lower = wl - (ww / 2.0)
+    upper = wl + (ww / 2.0)
+    windowed = np.clip(hu, lower, upper)
+    
+    # 5. Normalize to 0.0 - 1.0 float tensor
+    normalized = (windowed - lower) / (upper - lower)
+    return normalized</pre>
+          </div>
 
-# Convert raw pixel values to Hounsfield Units (HU)
-# HU = Pixel * RescaleSlope + RescaleIntercept
-hu_image = pixel_array * dcm.RescaleSlope + dcm.RescaleIntercept
-
-# Windowing Function (Stroke / Brain Window: WL 40, WW 80)
-def apply_dicom_window(hu_img, wl=40, ww=80):
-    lower = wl - (ww / 2.0)  # 0 HU
-    upper = wl + (ww / 2.0)  # 80 HU
-    windowed = np.clip(hu_img, lower, upper)
-    # Normalize to 0.0 - 1.0 float range
-    return (windowed - lower) / (upper - lower)</pre>
+          <!-- SECTION 4: TRAPS & PITFALLS -->
+          <div class="bg-[#12141d] p-4 rounded-xl border border-rose-500/30">
+            <h4 class="text-rose-400 font-bold mb-2 text-sm flex items-center">
+              <i class="fa-solid fa-triangle-exclamation mr-2 text-rose-500"></i>4. Common Traps & Programming Pitfalls
+            </h4>
+            <ul class="list-disc pl-5 space-y-1.5 text-xs text-gray-300">
+              <li><strong>The uint16 Underflow Disaster:</strong> Raw DICOM pixels are stored as unsigned 16-bit integers (`uint16`). If `RescaleIntercept` is -1024, calculating `pixel + (-1024)` on a `uint16` array causes integer underflow wraparound (`0 - 1024 = 64512`). Always cast to `np.float32` first!</li>
+              <li><strong>The Python For-Loop Slowness:</strong> Iterating over a 512x512x200 volume with nested Python loops takes ~10 seconds. NumPy SIMD vectorization executes in 3 milliseconds (~3,000&times; faster).</li>
+            </ul>
+          </div>
         `
       },
 

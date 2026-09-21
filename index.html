@@ -1,0 +1,1015 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>JARVIS // Dual Study Engine & Convergence Lab (v3.0 Ultra)</title>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <!-- Google Fonts: Orbitron & JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&family=Orbitron:wght@500;700;800;900&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --gold-primary: #eab308;
+      --gold-glow: rgba(234, 179, 8, 0.4);
+      --bg-dark: #070709;
+      --bg-panel: #0f1015;
+    }
+    body {
+      font-family: 'JetBrains Mono', monospace;
+      background-color: var(--bg-dark);
+      color: #f3f4f6;
+      background-image: 
+        radial-gradient(circle at 10% 20%, rgba(234, 179, 8, 0.06) 0%, transparent 25%),
+        radial-gradient(circle at 90% 80%, rgba(202, 138, 4, 0.05) 0%, transparent 25%),
+        linear-gradient(to bottom, #070709 0%, #0c0d12 50%, #050507 100%);
+      background-attachment: fixed;
+    }
+    .orbitron { font-family: 'Orbitron', sans-serif; }
+    
+    /* Cyber Gold Aesthetics */
+    .border-gold-glow {
+      border: 1px solid rgba(234, 179, 8, 0.25);
+      box-shadow: 0 0 15px rgba(234, 179, 8, 0.08);
+    }
+    .border-gold-glow:hover {
+      border-color: rgba(250, 204, 21, 0.6);
+      box-shadow: 0 0 25px rgba(234, 179, 8, 0.2);
+    }
+    .gold-gradient-text {
+      background: linear-gradient(135deg, #fef08a 0%, #eab308 50%, #ca8a04 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .gold-btn {
+      background: linear-gradient(135deg, #eab308 0%, #ca8a04 100%);
+      color: #000000;
+      font-weight: 700;
+      transition: all 0.2s ease;
+    }
+    .gold-btn:hover {
+      background: linear-gradient(135deg, #fde047 0%, #eab308 100%);
+      box-shadow: 0 0 20px rgba(234, 179, 8, 0.4);
+      transform: translateY(-1px);
+    }
+    
+    /* 3D Flip Flashcard */
+    .perspective-1000 { perspective: 1000px; }
+    .transform-style-3d { transform-style: preserve-3d; }
+    .backface-hidden { backface-visibility: hidden; }
+    .rotate-y-180 { transform: rotateY(180deg); }
+    
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: #070709; }
+    ::-webkit-scrollbar-thumb { background: #374151; border-radius: 3px; }
+    ::-webkit-scrollbar-thumb:hover { background: #eab308; }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col antialiased selection:bg-yellow-500 selection:text-black">
+
+  <!-- HUD Top Bar -->
+  <header class="border-b border-yellow-500/20 bg-black/70 backdrop-blur-md sticky top-0 z-50 px-4 lg:px-8 py-3">
+    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3">
+      <div class="flex items-center space-x-3">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-yellow-400 to-yellow-600 flex items-center justify-center text-black font-black text-2xl shadow-lg shadow-yellow-500/20">
+          J
+        </div>
+        <div>
+          <div class="orbitron font-bold text-lg tracking-wider gold-gradient-text flex items-center space-x-2">
+            <span>JARVIS // DUAL NEXUS</span>
+            <span class="text-[9px] uppercase px-2 py-0.5 bg-yellow-500/20 text-yellow-400 border border-yellow-500/30 rounded font-mono">v3.0 ULTRA</span>
+          </div>
+          <p class="text-[11px] text-gray-400">Radiological Sciences &times; Healthcare AI & Automation</p>
+        </div>
+      </div>
+
+      <!-- Navigation Tabs -->
+      <nav class="flex items-center space-x-1.5 bg-[#12141c] p-1 rounded-xl border border-yellow-500/20">
+        <button onclick="switchTab('curriculum')" id="tab-curriculum" class="px-3.5 py-1.5 text-xs font-semibold rounded-lg bg-yellow-500 text-black shadow-md transition-all">
+          <i class="fa-solid fa-graduation-cap mr-1.5"></i>Curricula
+        </button>
+        <button onclick="switchTab('arena')" id="tab-arena" class="px-3.5 py-1.5 text-xs font-semibold rounded-lg text-gray-400 hover:text-yellow-400 transition-all">
+          <i class="fa-solid fa-brain mr-1.5"></i>Test Arena
+        </button>
+        <button onclick="switchTab('convergence')" id="tab-convergence" class="px-3.5 py-1.5 text-xs font-semibold rounded-lg text-gray-400 hover:text-yellow-400 transition-all">
+          <i class="fa-solid fa-atom mr-1.5"></i>Convergence Lab
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main Workspace -->
+  <main class="flex-1 max-w-7xl w-full mx-auto px-4 lg:px-8 py-6">
+
+    <!-- ==================== SECTION 1: CURRICULUM ==================== -->
+    <section id="section-curriculum" class="space-y-6">
+      <!-- Stream Switcher & Search Bar -->
+      <div class="bg-[#0f1015] border border-yellow-500/20 rounded-2xl p-4 flex flex-col md:flex-row items-center justify-between gap-4">
+        <div class="flex flex-wrap items-center gap-2">
+          <span class="text-xs text-yellow-500 font-bold uppercase tracking-wider mr-2"><i class="fa-solid fa-filter mr-1"></i> Stream:</span>
+          <button onclick="filterCurriculum('all')" id="btn-filter-all" class="px-3 py-1.5 text-xs rounded-lg bg-yellow-500 text-black font-bold">All Courses (14)</button>
+          <button onclick="filterCurriculum('rad')" id="btn-filter-rad" class="px-3 py-1.5 text-xs rounded-lg bg-[#181a24] text-gray-300 border border-gray-700 hover:border-yellow-500/50">Radiology & Clinical (9)</button>
+          <button onclick="filterCurriculum('ai')" id="btn-filter-ai" class="px-3 py-1.5 text-xs rounded-lg bg-[#181a24] text-gray-300 border border-gray-700 hover:border-yellow-500/50">Data Science & AI (5)</button>
+        </div>
+        <div class="w-full md:w-80">
+          <div class="relative">
+            <input type="text" id="courseSearch" oninput="searchCourses()" placeholder="Search topics, formulas, protocols, code..." 
+                   class="w-full bg-[#161822] border border-yellow-500/20 rounded-xl px-3.5 py-1.5 pl-9 text-xs text-gray-200 focus:outline-none focus:border-yellow-500 transition-all">
+            <i class="fa-solid fa-magnifying-glass absolute left-3 top-2.5 text-xs text-gray-500"></i>
+          </div>
+        </div>
+      </div>
+
+      <!-- Course Grid -->
+      <div id="course-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+        <!-- Dynamically populated via JS -->
+      </div>
+    </section>
+
+    <!-- ==================== SECTION 2: TEST ARENA ==================== -->
+    <section id="section-arena" class="hidden space-y-6">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        
+        <!-- 3D Flashcard Drill -->
+        <div class="bg-[#0f1015] border border-yellow-500/20 rounded-2xl p-6 flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between mb-4">
+              <span class="text-xs uppercase tracking-widest text-yellow-400 font-bold"><i class="fa-solid fa-bolt mr-1"></i> Interactive 3D Drill</span>
+              <span id="card-counter" class="text-xs font-mono text-yellow-500/80 bg-yellow-500/10 px-2 py-0.5 rounded border border-yellow-500/20">1 / 14</span>
+            </div>
+
+            <div class="perspective-1000 w-full h-72 cursor-pointer" onclick="flipCard()">
+              <div id="flashcard-inner" class="transform-style-3d relative w-full h-full duration-500 rounded-xl border border-yellow-500/30 bg-[#14161f] p-6 flex flex-col justify-center items-center text-center shadow-lg">
+                <!-- Front -->
+                <div class="backface-hidden absolute inset-0 p-6 flex flex-col justify-center items-center">
+                  <span id="card-category" class="text-[10px] uppercase font-bold tracking-wider px-2.5 py-0.5 rounded bg-yellow-500/10 text-yellow-400 mb-3 border border-yellow-500/20">Category</span>
+                  <p id="card-front" class="text-sm font-semibold text-gray-100 leading-relaxed px-2">Clinical or technical question loading...</p>
+                  <span class="text-[10px] text-gray-500 mt-4"><i class="fa-solid fa-arrows-rotate mr-1"></i> Click card to reveal scientific rationale</span>
+                </div>
+                <!-- Back -->
+                <div class="backface-hidden rotate-y-180 absolute inset-0 p-6 flex flex-col justify-center items-center bg-[#171924] rounded-xl border border-yellow-500/40">
+                  <span class="text-[10px] uppercase font-bold text-yellow-400 mb-2 tracking-wider">Authoritative Rationale</span>
+                  <p id="card-back" class="text-xs text-gray-300 leading-relaxed px-2">Answer loading...</p>
+                  <span class="text-[10px] text-yellow-500/70 mt-4"><i class="fa-solid fa-arrows-rotate mr-1"></i> Click to flip back</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Controls -->
+          <div class="flex items-center justify-between mt-6 pt-4 border-t border-gray-800">
+            <button onclick="prevCard()" class="px-4 py-1.5 rounded-lg text-xs bg-[#181a24] text-gray-300 hover:text-yellow-400 border border-gray-700">
+              <i class="fa-solid fa-chevron-left mr-1"></i> Previous
+            </button>
+            <button onclick="nextCard()" class="px-4 py-1.5 rounded-lg text-xs gold-btn">
+              Next Question <i class="fa-solid fa-chevron-right ml-1"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Diagnostic Exam Mode -->
+        <div class="bg-[#0f1015] border border-yellow-500/20 rounded-2xl p-6 flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between mb-4">
+              <span class="text-xs uppercase tracking-widest text-yellow-400 font-bold"><i class="fa-solid fa-circle-question mr-1"></i> Diagnostic Exam Mode</span>
+              <span id="quiz-score" class="text-xs font-mono text-yellow-400 bg-yellow-500/10 px-2 py-0.5 rounded border border-yellow-500/20">Score: 0 / 0</span>
+            </div>
+
+            <div class="mb-4">
+              <span id="quiz-modality" class="text-[10px] font-bold uppercase tracking-wider text-yellow-500">Domain</span>
+              <h3 id="quiz-question" class="text-sm font-semibold text-gray-100 mt-1 leading-snug">Exam question loading...</h3>
+            </div>
+
+            <div id="quiz-options" class="space-y-2.5">
+              <!-- Rendered via JS -->
+            </div>
+
+            <!-- Feedback Alert -->
+            <div id="quiz-feedback" class="hidden mt-4 p-3.5 rounded-xl border text-xs leading-relaxed"></div>
+          </div>
+
+          <div class="flex items-center justify-end mt-6 pt-4 border-t border-gray-800">
+            <button id="quiz-next-btn" onclick="nextQuestion()" class="hidden px-4 py-1.5 rounded-lg text-xs gold-btn">
+              Next Challenge <i class="fa-solid fa-chevron-right ml-1"></i>
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ==================== SECTION 3: CONVERGENCE LAB ==================== -->
+    <section id="section-convergence" class="hidden space-y-6">
+      <div class="bg-[#0f1015] border border-yellow-500/20 rounded-2xl p-6">
+        <div class="flex items-center space-x-3 mb-4">
+          <div class="w-9 h-9 rounded-lg bg-yellow-500/20 border border-yellow-500/40 flex items-center justify-center text-yellow-400 text-base">
+            <i class="fa-solid fa-microchip"></i>
+          </div>
+          <div>
+            <h2 class="orbitron font-bold text-base text-yellow-400">Radiology &times; AI Convergence Terminal</h2>
+            <p class="text-xs text-gray-400">Simulating End-to-End Deep Learning Inference over Clinical DICOM Pipelines</p>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          <!-- Simulation Parameters -->
+          <div class="space-y-4">
+            <div>
+              <label class="text-xs text-gray-300 font-semibold block mb-1.5">Clinical AI Pipeline</label>
+              <select id="conv-pipeline" class="w-full bg-[#161822] border border-yellow-500/30 rounded-xl p-2.5 text-xs text-gray-200 focus:outline-none focus:border-yellow-500">
+                <option value="pneumo">Chest X-Ray Pneumothorax Detector (ResNet-50 + Grad-CAM)</option>
+                <option value="stroke">Brain CT Non-Contrast ASPECTS Ischemic Core (3D U-Net)</option>
+                <option value="dose">Real-Time Fluoro/CT Dose Monitor (DLP & SSDE Predictor)</option>
+                <option value="spine">Trauma Lateral C-Spine Alignment Verifier (YOLOv8-Medical)</option>
+                <option value="liver">Triphasic Liver HCC Lesion Segmenter (DenseNet-121)</option>
+              </select>
+            </div>
+
+            <div>
+              <label class="text-xs text-gray-300 font-semibold block mb-1.5">Inference Backend / Hardware</label>
+              <select id="conv-backend" class="w-full bg-[#161822] border border-yellow-500/30 rounded-xl p-2.5 text-xs text-gray-200">
+                <option value="tensorrt">NVIDIA TensorRT FP16 Execution Engine</option>
+                <option value="onnx">ONNX Runtime WebGL (Client Edge Direct)</option>
+                <option value="libtorch">PyTorch LibTorch C++ Production Core</option>
+                <option value="openvino">Intel OpenVINO Quantized INT8 Engine</option>
+              </select>
+            </div>
+
+            <button onclick="runConvergenceSim()" id="btn-run-sim" class="w-full py-2.5 gold-btn rounded-xl text-xs flex items-center justify-center space-x-2">
+              <i class="fa-solid fa-play"></i>
+              <span>Initialize Clinical Inference Pipeline</span>
+            </button>
+          </div>
+
+          <!-- Terminal Monitor -->
+          <div class="lg:col-span-2 bg-[#08090c] border border-yellow-500/30 rounded-xl p-4 font-mono text-xs text-gray-300 h-72 overflow-y-auto flex flex-col justify-between" id="conv-terminal">
+            <div id="conv-log" class="space-y-1">
+              <span class="text-gray-500">// JARVIS Convergence Diagnostic Sandbox v3.0</span><br/>
+              <span class="text-yellow-400">> System standing by. Configure clinical target and trigger inference.</span>
+            </div>
+            <div class="text-[10px] text-gray-500 border-t border-gray-800 pt-2 flex flex-wrap justify-between gap-2 mt-4 font-mono">
+              <span id="telemetry-latency">LATENCY: -- ms</span>
+              <span id="telemetry-vram">VRAM: 3.8GB / 16GB</span>
+              <span id="telemetry-syntax">SYNTAX: EXPLICIT VR LITTLE ENDIAN</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Modal for Comprehensive Course Syllabi -->
+  <div id="course-modal" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-md hidden flex items-center justify-center p-4">
+    <div class="bg-[#0f1015] border border-yellow-500/40 rounded-2xl max-w-4xl w-full max-h-[88vh] flex flex-col shadow-2xl">
+      <div class="p-5 border-b border-gray-800 flex items-center justify-between">
+        <div class="flex items-center space-x-3">
+          <div id="modal-icon" class="w-9 h-9 rounded-lg bg-yellow-500/20 text-yellow-400 flex items-center justify-center text-lg"></div>
+          <div>
+            <span id="modal-stream" class="text-[10px] uppercase font-bold tracking-widest text-yellow-500">STREAM</span>
+            <h2 id="modal-title" class="orbitron font-bold text-base text-gray-100">Course Title</h2>
+          </div>
+        </div>
+        <button onclick="closeModal()" class="text-gray-400 hover:text-yellow-400 text-xl"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <div id="modal-body" class="p-6 overflow-y-auto space-y-5 text-xs text-gray-300 leading-relaxed font-sans">
+        <!-- Injected via JS -->
+      </div>
+      <div class="p-4 border-t border-gray-800 bg-[#0c0d12] rounded-b-2xl flex justify-between items-center">
+        <span class="text-[11px] text-gray-500 font-mono">Academic Standard: ASRT / CAMPEP / MICCAI Compliant</span>
+        <button onclick="closeModal()" class="px-5 py-1.5 rounded-lg text-xs bg-gray-800 hover:bg-gray-700 text-gray-200 font-semibold">Dismiss</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- JavaScript Engine -->
+  <script>
+    /* =========================================================================
+       ACADEMIC CURRICULUM REGISTRY (14 COURSES)
+       ========================================================================= */
+    const courses = [
+      // 1. RAD-101: Radiation Physics & Technique
+      {
+        id: "rad_101",
+        stream: "rad",
+        title: "RAD-101: Radiation Physics & Exposure Dynamics",
+        badge: "Physics Foundation",
+        icon: "fa-sliders",
+        summary: "Bremsstrahlung vs. Characteristic radiation, 15% kVp rule, anti-scatter grid factors, and geometric unsharpness.",
+        content: `
+          <h4 class="text-yellow-400 font-bold mb-2 text-sm">1. Production of X-Rays: Bremsstrahlung vs. Characteristic</h4>
+          <p>X-rays are produced when high-velocity electrons decelerate near target tungsten nuclei (Bremsstrahlung, continuous spectrum accounting for ~80-90% of beam) or eject K-shell orbital electrons (Characteristic, discrete emission spikes at 69.5 keV for Tungsten target).</p>
+
+          <h4 class="text-yellow-400 font-bold mt-4 mb-2 text-sm">2. The 15% kVp Rule & Exposure Dynamics</h4>
+          <p>A 15% increase in kVp doubles image receptor exposure, equivalent to doubling the mAs. To minimize patient dose while preserving receptor exposure:</p>
+          <div class="bg-black/60 p-2.5 rounded border border-yellow-500/20 font-mono text-yellow-300 my-2">
+            Patient Dose Reduction = Increase kVp by 15% & Decrease mAs by 50%
+          </div>
+
+          <h4 class="text-yellow-400 font-bold mt-4 mb-2 text-sm">3. Anti-Scatter Grids & Bucky Factors</h4>
+          <p>Indicated when anatomical thickness exceeds 10 cm or tube potential > 70 kVp. Formula: <code>mAs2 = mAs1 &times; (GCF2 / GCF1)</code>.</p>
+          <ul class="list-disc pl-5 space-y-1 text-gray-300">
+            <li>No Grid: GCF = 1</li>
+            <li>5:1 Grid: GCF = 2</li>
+            <li>6:1 Grid: GCF = 3</li>
+            <li>8:1 Grid: GCF = 4</li>
+            <li>12:1 Grid: GCF = 5</li>
+            <li>16:1 Grid: GCF = 6</li>
+          </ul>
+
+          <h4 class="text-yellow-400 font-bold mt-4 mb-2 text-sm">4. Geometric Unsharpness (Focal Spot Blur)</h4>
+          <p><code>FSB = Effective Focal Spot &times; (OID / SOD)</code>. To maximize spatial resolution: minimize OID (object-to-image distance), maximize SID (source-to-image distance), and utilize fractional focal spots (0.6 mm vs 1.2 mm).</p>
+        `
+      },
+
+      // 2. RAD-102: Patient Care & Pharmacology
+      {
+        id: "rad_102",
+        stream: "rad",
+        title: "RAD-102: Hospital Practice, Patient Care & Contrast Pharmacology",
+        badge: "Clinical Nursing",
+        icon: "fa-hospital-user",
+        summary: "Transmission-based precautions, adverse iodinated contrast reactions, emergency IM Epinephrine, and extravasation.",
+        content: `
+          <h4 class="text-yellow-400 font-bold mb-2 text-sm">1. Transmission-Based Infection Control</h4>
+          <ul class="list-disc pl-5 space-y-1 text-gray-300">
+            <li><strong>Contact:</strong> MRSA, C. difficile (spores require handwashing with soap and water; alcohol rub is ineffective).</li>
+            <li><strong>Droplet:</strong> Influenza, Neisseria meningitidis (surgical mask within 2 meters).</li>
+            <li><strong>Airborne:</strong> Mycobacterium tuberculosis, measles, varicella (negative pressure room, N95/FFP3 respirator).</li>
+          </ul>
+
+          <h4 class="text-yellow-400 font-bold mt-4 mb-2 text-sm">2. Acute Contrast Reaction Management</h4>
+          <ul class="list-disc pl-5 space-y-1.5 text-gray-300">
+            <li><strong>Mild:</strong> Limited hives, pruritus, nasal congestion. Action: Close monitoring, reassurance.</li>
+            <li><strong>Moderate:</strong> Widespread urticaria, facial edema without stridor, mild bronchospasm. Action: Diphenhydramine 25-50 mg IV/oral, close vitals monitoring.</li>
+            <li><strong>Severe / Anaphylactoid:</strong> Laryngeal stridor, profound hypotension, hypoxia. Action: <strong>Epinephrine 1:1,000 (0.3 - 0.5 mg IM)</strong> anterolateral thigh immediately; high-flow O2 (10-15 L/min), rapid IV fluid bolus, call Emergency Code.</li>
+            <li><strong>Vasovagal Reaction:</strong> Hypotension paired with <strong>BRADYCARDIA</strong> (HR < 60 bpm). Action: Trendelenburg positioning (elevate feet 30°), IV fluids, Atropine 0.5 - 1.0 mg IV if refractory.</li>
+          </ul>
+
+          <h4 class="text-yellow-400 font-bold mt-4 mb-2 text-sm">3. Extravasation Protocol</h4>
+          <p>Stop injection immediately. Elevate the affected limb above the level of the heart. Apply cold compresses to reduce local edema and pain. Notify the attending radiologist and observe for compartment syndrome.</p>
+        `
+      },
+
+      // 3. RAD-201: Trauma & Emergency Radiography
+      {
+        id: "rad_201",
+        stream: "rad",
+        title: "RAD-201: Trauma & Emergency Radiography (A&E Clearance)",
+        badge: "Trauma Protocol",
+        icon: "fa-person-falling-burst",
+        summary: "Horizontal beam lateral C-spine clearance, Swimmer's view, tension pneumothorax markers, and open pelvis series.",
+        content: `
+          <h4 class="text-yellow-400 font-bold mb-2 text-sm">1. Trauma Cervical Spine Clearance</h4>
+          <p>Cross-table horizontal beam lateral projection must be acquired without moving the patient or removing the rigid cervical collar. <strong>Non-negotiable requirement:</strong> Clear demonstration from C1 down through the superior endplate of T1. If shoulders obscure C7/T1, perform a Swimmer's projection (Twining method) or proceed immediately to emergent CT.</p>
+
+          <h4 class="text-yellow-400 font-bold mt-4 mb-2 text-sm">2. Tension Pneumothorax & Critical Chest Markers</h4>
+          <p>Radiographic signs of life-threatening tension pneumothorax include: ipsilateral lung collapse, complete depression of the hemidiaphragm, and contralateral deviation of the trachea and mediastinum. This is a clinical emergency requiring immediate needle decompression prior to definitive chest tube insertion.</p>
+
+          <h4 class="text-yellow-400 font-bold mt-4 mb-2 text-sm">3. Pelvic Trauma Series</h4>
+          <p>Evaluate for disruption of the pelvic ring (Malgaigne or open-book fractures) and pubic symphysis diastasis (> 1 cm). <em>Caution:</em> Never attempt internal rotation of the lower limbs if hip fracture or pelvic ring disruption is clinically suspected.</p>
+        `
+      },
+
+      // 4. RAD-202: Dental & Maxillofacial Radiography
+      {
+        id: "rad_202",
+        stream: "rad",
+        title: "RAD-202: Dental & Maxillofacial Radiography",
+        badge: "Maxillofacial",
+        icon: "fa-tooth",
+        summary: "Paralleling vs. bisecting angle techniques, OPG focal trough geometry, and ghost artifact prevention.",
+        content: `
+          <h4 class="text-yellow-400 font-bold mb-2 text-sm">1. Intraoral Imaging: Paralleling vs. Bisecting Angle</h4>
+          <ul class="list-disc pl-5 space-y-1 text-gray-300">
+            <li><strong>Paralleling Technique (Long-Cone):</strong> Image receptor is placed parallel to the long axis of the tooth; central ray is directed perpendicular to both. Eliminates geometric distortion and is the clinical gold standard.</li>
+            <li><strong>Bisecting-Angle Technique:</strong> Central ray is directed perpendicular to the imaginary angle bisector between tooth axis and receptor plane. Prone to foreshortening (central ray angle too steep) and elongation (angle too shallow).</li>
+          </ul>
+
+          <h4 class="text-yellow-400 font-bold mt-4 mb-2 text-sm">2. Orthopantomography (OPG) Positioning Errors</h4>
+          <ul class="list-disc pl-5 space-y-1 text-gray-300">
+            <li><strong>Tongue off palate:</strong> Creates a dark radiolucent air shadow over maxillary root apices.</li>
+            <li><strong>Patient slumped:</strong> Ghost shadow of the cervical spine superimposes over the midline mandibular structures.</li>
+            <li><strong>Head tilted up:</strong> Frankfort plane tilted upwards causes flattened occlusal plane ("reverse smile") and hard palate shadow over maxillary roots.</li>
+          </ul>
+        `
+      },
+
+      // 5. RAD-301: CT Physics, Protocols & Dose
+      {
+        id: "rad_301",
+        stream: "rad",
+        title: "RAD-301: Computed Tomography (CT) Physics & Multiphasic Protocols",
+        badge: "Computed Tomography",
+        icon: "fa-compact-disc",
+        summary: "MDCT slip-rings, Pitch dynamics, CTDIvol/DLP/SSDE metrics, multiphasic liver, and acute stroke ASPECTS scoring.",
+        content: `
+          <h4 class="text-yellow-400 font-bold mb-2 text-sm">1. Pitch and Dose Dynamics</h4>
+          <div class="bg-black/60 p-2.5 rounded border border-yellow-500/20 font-mono text-yellow-300 my-2">
+            Pitch = Table Distance per Gantry Rotation / Total Beam Collimation
+          </div>
+          <p>Pitch > 1 produces non-overlapping helices, reducing patient dose and scan time with a minor loss of z-axis slice sensitivity profile. Pitch < 1 overlaps slices, increasing patient dose but enhancing 3D multiplanar reformatting.</p>
+
+          <h4 class="text-yellow-400 font-bold mt-4 mb-2 text-sm">2. Multiphasic Liver Dynamics</h4>
+          <ul class="list-disc pl-5 space-y-1 text-gray-300">
+            <li><strong>Late Arterial (35-40s):</strong> Peak enhancement of hypervascular lesions (Hepatocellular Carcinoma - HCC) supplied via hepatic artery.</li>
+            <li><strong>Portal Venous (70-80s):</strong> Peak enhancement of background hepatic parenchyma (75-80% portal supply). Hypovascular metastases appear dark.</li>
+            <li><strong>Equilibrium / Delayed (3-5 min):</strong> Washout of HCC; persistent delayed enhancement of fibrous stroma (cholangiocarcinoma).</li>
+          </ul>
+
+          <h4 class="text-yellow-400 font-bold mt-4 mb-2 text-sm">3. Acute Stroke Triage & ASPECTS</h4>
+          <p>Non-contrast CT head rules out hemorrhage (+60 to +80 HU). Ischemic changes are quantified via <strong>ASPECTS</strong> (Alberta Stroke Program Early CT Score, 0-10 scale) on narrow stroke windows (WL: 35-40, WW: 80).</p>
+        `
+      },
+
+      // 6. RAD-302: MRI Physics & Bio-effects
+      {
+        id: "rad_302",
+        stream: "rad",
+        title: "RAD-302: Magnetic Resonance Imaging (MRI) Principles & Safety",
+        badge: "Advanced Magnetic",
+        icon: "fa-magnet",
+        summary: "Larmor equation, T1/T2 relaxation, pulse sequences (SE, TSE, FLAIR, STIR), and ACR Safety Zones I-IV.",
+        content: `
+          <h4 class="text-yellow-400 font-bold mb-2 text-sm">1. The Larmor Equation & Precession</h4>
+          <div class="bg-black/60 p-2.5 rounded border border-yellow-500/20 font-mono text-yellow-300 my-2">
+            &omega;0 = &gamma; &times; B0 &nbsp;&nbsp;|&nbsp;&nbsp; For 1H: &gamma; = 42.58 MHz/Tesla
+          </div>
+          <p>At 1.5 Tesla: resonance frequency is 63.87 MHz. At 3.0 Tesla: resonance frequency is 127.74 MHz.</p>
+
+          <h4 class="text-yellow-400 font-bold mt-4 mb-2 text-sm">2. Relaxation Dynamics & Weighting</h4>
+          <ul class="list-disc pl-5 space-y-1 text-gray-300">
+            <li><strong>T1 (Spin-Lattice) Recovery:</strong> Longitudinal magnetization recovers 63% of net value. Short TR and short TE emphasize fat (bright) and water (dark).</li>
+            <li><strong>T2 (Spin-Spin) Decay:</strong> Transverse magnetization decays to 37% due to spin dephasing. Long TR and long TE emphasize fluid (bright CSF and edema).</li>
+          </ul>
+
+          <h4 class="text-yellow-400 font-bold mt-4 mb-2 text-sm">3. ACR MRI Safety Zones</h4>
+          <p><strong>Zone I:</strong> Public access. <strong>Zone II:</strong> Controlled greeting & screening. <strong>Zone III:</strong> Keycard-locked console area (radiographer control). <strong>Zone IV:</strong> The scanner room. Unscreened ferromagnetic objects are strictly prohibited due to deadly projectile missile effect.</p>
+        `
+      },
+
+      // 7. RAD-401: Radiotherapy & Radiobiology
+      {
+        id: "rad_401",
+        stream: "rad",
+        title: "RAD-401: Radiotherapy, Radiobiology & Radiation Protection",
+        badge: "Radiation Oncology",
+        icon: "fa-crosshairs",
+        summary: "The 4 Rs of radiobiology, ICRU 50/62 target volumes (GTV/CTV/PTV), LINACs, and ICRP dose limits.",
+        content: `
+          <h4 class="text-yellow-400 font-bold mb-2 text-sm">1. The 4 Rs of Radiobiology</h4>
+          <ul class="list-disc pl-5 space-y-1 text-gray-300">
+            <li><strong>Repair:</strong> Normal cells repair sublethal DNA damage faster than malignant cells between daily fractions.</li>
+            <li><strong>Reoxygenation:</strong> Hypoxic core cells become reoxygenated as outer tumor cells die, increasing radiosensitivity (Oxygen Enhancement Ratio - OER).</li>
+            <li><strong>Redistribution:</strong> Cells arrest in the radiosensitive G2/M phases of the cell cycle.</li>
+            <li><strong>Repopulation:</strong> Malignant cells proliferate during extended treatment pauses (fractions must not be delayed).</li>
+          </ul>
+
+          <h4 class="text-yellow-400 font-bold mt-4 mb-2 text-sm">2. Target Volume Hierarchy (ICRU 50 / 62)</h4>
+          <p><strong>GTV (Gross Tumor Volume):</strong> Macroscopically demonstrable tumor extent. <strong>CTV (Clinical Target Volume):</strong> GTV + subclinical microscopic invasion margin. <strong>PTV (Planning Target Volume):</strong> CTV + margins for patient setup variation and internal organ motion.</p>
+
+          <h4 class="text-yellow-400 font-bold mt-4 mb-2 text-sm">3. ICRP Dose Limits</h4>
+          <p>Occupational effective dose limit is <strong>20 mSv per year</strong> averaged over 5 years (no single year > 50 mSv). Public dose limit is <strong>1 mSv per year</strong>.</p>
+        `
+      },
+
+      // 8. RAD-402: Quality Assurance & Equipment Testing
+      {
+        id: "rad_402",
+        stream: "rad",
+        title: "RAD-402: Quality Assurance & Diagnostic Equipment Calibration",
+        badge: "Physics QC",
+        icon: "fa-gauge-high",
+        summary: "Collimator 8-penny test, Half-Value Layer (HVL), linearity, reproducibility, and CT/MRI calibration phantoms.",
+        content: `
+          <h4 class="text-yellow-400 font-bold mb-2 text-sm">1. Diagnostic Radiography QC Tolerances</h4>
+          <ul class="list-disc pl-5 space-y-1 text-gray-300">
+            <li><strong>Collimator / Light Field Alignment:</strong> Must agree within &plusmn;2% of SID (tested via 8-penny test or alignment template).</li>
+            <li><strong>Central Ray Perpendicularity:</strong> Within &plusmn;1 degree of vertical.</li>
+            <li><strong>Exposure Reproducibility:</strong> Coefficient of variation (CV) must not exceed 0.05 (5%) for 10 identical exposures.</li>
+            <li><strong>Exposure Linearity:</strong> mAs reciprocity coefficient of linearity must be within &plusmn;10% across adjacent stations.</li>
+            <li><strong>Timer Accuracy:</strong> Exposures > 10 ms must remain within &plusmn;5% of indicated time.</li>
+          </ul>
+
+          <h4 class="text-yellow-400 font-bold mt-4 mb-2 text-sm">2. Half-Value Layer (HVL) & Filtration</h4>
+          <p>HVL measures beam quality (penetrating power). The minimum total beam filtration for radiographic tubes operating above 70 kVp is <strong>2.5 mm Aluminum equivalent</strong>.</p>
+        `
+      },
+
+      // 9. RAD-403: Healthcare Management & Psychology
+      {
+        id: "rad_403",
+        stream: "rad",
+        title: "RAD-403: Radiology Management, RIS/PACS & Patient Psychology",
+        badge: "Administration",
+        icon: "fa-people-roof",
+        summary: "HL7/DICOM integration, RIS Modality Worklists, GSDF monitor calibration, claustrophobia mitigation, and trauma crisis de-escalation.",
+        content: `
+          <h4 class="text-yellow-400 font-bold mb-2 text-sm">1. Clinical Workflow Architecture: HIS / RIS / PACS</h4>
+          <p>The Hospital Information System (HIS) communicates patient demographics to the Radiology Information System (RIS) via HL7 ADT messages. The RIS generates DICOM Modality Worklists (MWL) for scanners. Acquired studies are transmitted to PACS via DICOM C-STORE and reviewed on calibrated DICOM Part 14 Grayscale Standard Display Function (GSDF) displays.</p>
+
+          <h4 class="text-yellow-400 font-bold mt-4 mb-2 text-sm">2. Claustrophobia Management in MRI</h4>
+          <p>Affects up to 15% of patients. Management: Prone scanning (allowing patient to look out of the bore), wide-bore systems (70 cm), prism mirror glasses, constant 2-way intercom contact, and family accompaniment once metal-screened.</p>
+        `
+      },
+
+      // 10. AI-101: Medical Data Science with Python
+      {
+        id: "ai_101",
+        stream: "ai",
+        title: "AI-101: Medical Data Science & Vectorized Python",
+        badge: "Programming",
+        icon: "fa-brands fa-python",
+        summary: "High-performance NumPy SIMD array manipulation, PyDICOM header parsing, Hounsfield Unit conversion, and windowing.",
+        content: `
+          <h4 class="text-yellow-400 font-bold mb-2 text-sm">1. High-Performance DICOM Manipulation with PyDICOM & NumPy</h4>
+          <p>Avoid looping over pixel arrays in Python. Always use vectorized C-level operations:</p>
+          <pre class="bg-black/80 p-3 rounded border border-yellow-500/20 text-yellow-300 font-mono text-[11px] overflow-x-auto">
+import pydicom
+import numpy as np
+
+# Load DICOM dataset
+dcm = pydicom.dcmread("patient_ct.dcm")
+pixel_array = dcm.pixel_array.astype(np.float32)
+
+# Convert raw pixel values to Hounsfield Units (HU)
+# HU = Pixel * RescaleSlope + RescaleIntercept
+hu_image = pixel_array * dcm.RescaleSlope + dcm.RescaleIntercept
+
+# Windowing Function (Stroke / Brain Window: WL 40, WW 80)
+def apply_dicom_window(hu_img, wl=40, ww=80):
+    lower = wl - (ww / 2.0)  # 0 HU
+    upper = wl + (ww / 2.0)  # 80 HU
+    windowed = np.clip(hu_img, lower, upper)
+    # Normalize to 0.0 - 1.0 float range
+    return (windowed - lower) / (upper - lower)</pre>
+        `
+      },
+
+      // 11. AI-201: Healthcare Relational SQL & Dose Registries
+      {
+        id: "ai_201",
+        stream: "ai",
+        title: "AI-201: Healthcare Relational SQL & Radiation Registries",
+        badge: "Databases",
+        icon: "fa-database",
+        summary: "Complex joins, window ranking functions, and automated cumulative CT dose tracking against national DRL thresholds.",
+        content: `
+          <h4 class="text-yellow-400 font-bold mb-2 text-sm">1. Radiation Dose Tracking via SQL Window Functions</h4>
+          <p>Querying patient populations exceeding national Diagnostic Reference Levels (DRLs) across multiple imaging encounters:</p>
+          <pre class="bg-black/80 p-3 rounded border border-yellow-500/20 text-yellow-300 font-mono text-[11px] overflow-x-auto">
+SELECT 
+    p.mrn,
+    p.full_name,
+    COUNT(s.study_uid) AS total_ct_examinations,
+    SUM(s.dlp_mgy_cm) AS cumulative_dlp,
+    ROUND(AVG(s.dlp_mgy_cm), 2) AS mean_scan_dlp,
+    RANK() OVER (ORDER BY SUM(s.dlp_mgy_cm) DESC) AS dose_cohort_rank
+FROM clinical_patients p
+JOIN ct_radiation_events s ON p.patient_id = s.patient_id
+WHERE s.acquisition_timestamp >= NOW() - INTERVAL '12 MONTH'
+GROUP BY p.mrn, p.full_name
+HAVING SUM(s.dlp_mgy_cm) > 1500; -- Diagnostic Reference Level threshold</pre>
+        `
+      },
+
+      // 12. AI-301: Machine Learning in Diagnostics
+      {
+        id: "ai_301",
+        stream: "ai",
+        title: "AI-301: Machine Learning in Healthcare Diagnostics & Validation",
+        badge: "Machine Learning",
+        icon: "fa-brain",
+        summary: "Sensitivity vs. Specificity tradeoffs, ROC-AUC analysis, and handling severe clinical class imbalance with Focal Loss.",
+        content: `
+          <h4 class="text-yellow-400 font-bold mb-2 text-sm">1. Medical Diagnostic Metrics</h4>
+          <ul class="list-disc pl-5 space-y-1 text-gray-300">
+            <li><strong>Sensitivity (Recall):</strong> <code>TP / (TP + FN)</code>. In screening mammography, missed cancers are catastrophic; high sensitivity is mandatory.</li>
+            <li><strong>Specificity:</strong> <code>TN / (TN + FP)</code>. Minimizes false positives and unnecessary invasive biopsies.</li>
+            <li><strong>ROC-AUC:</strong> Measures discrimination across all classification thresholds (>0.90 indicates high clinical fidelity).</li>
+          </ul>
+
+          <h4 class="text-yellow-400 font-bold mt-4 mb-2 text-sm">2. Handling Extreme Class Imbalance: Focal Loss</h4>
+          <p>In medical datasets, lesions often comprise < 2% of samples. Standard cross-entropy is overwhelmed by easy negative background pixels. <strong>Focal Loss</strong> applies a dynamic modulating factor <code>(1 - pt)^&gamma;</code> to down-weight easy examples:</p>
+          <div class="bg-black/60 p-2.5 rounded border border-yellow-500/20 font-mono text-yellow-300 my-2">
+            FL(pt) = -&alpha;t &times; (1 - pt)^&gamma; &times; log(pt) &nbsp;&nbsp;(typically &gamma;=2, &alpha;=0.25)
+          </div>
+        `
+      },
+
+      // 13. AI-401: Deep Learning & 3D U-Nets
+      {
+        id: "ai_401",
+        stream: "ai",
+        title: "AI-401: Deep Learning, CNNs & 3D U-Net Segmentation",
+        badge: "Neural Networks",
+        icon: "fa-network-wired",
+        summary: "Encoder-decoder topologies, skip connections, 3D volumetric convolutions, Dice loss, and Grad-CAM explainability.",
+        content: `
+          <h4 class="text-yellow-400 font-bold mb-2 text-sm">1. 3D U-Net Architecture in Medical Segmentation</h4>
+          <p>Medical image segmentation relies on the U-Net architecture. It features a contracting encoder path (extracting contextual features) and a symmetric expanding decoder path (restoring spatial resolution), connected by <strong>skip connections</strong> that feed high-resolution anatomical coordinates directly across layers.</p>
+
+          <h4 class="text-yellow-400 font-bold mt-4 mb-2 text-sm">2. The Dice Similarity Coefficient (DSC)</h4>
+          <div class="bg-black/60 p-2.5 rounded border border-yellow-500/20 font-mono text-yellow-300 my-2">
+            DSC = (2 &times; |A &cap; B|) / (|A| + |B|) &nbsp;&nbsp;|&nbsp;&nbsp; Dice Loss = 1 - DSC
+          </div>
+          <p>Directly measures voxel overlap between predicted contour A and ground-truth contour B. Insensitive to background class dominance.</p>
+        `
+      },
+
+      // 14. AI-402: Clinical Automation & DICOMweb
+      {
+        id: "ai_402",
+        stream: "ai",
+        title: "AI-402: Clinical Automation, DICOMweb & FHIR Standards",
+        badge: "Automation Engineering",
+        icon: "fa-robot",
+        summary: "WADO-RS, QIDO-RS, STOW-RS, HL7 FHIR DiagnosticReport payloads, and TensorRT edge deployment.",
+        content: `
+          <h4 class="text-yellow-400 font-bold mb-2 text-sm">1. RESTful DICOMweb Microservices</h4>
+          <ul class="list-disc pl-5 space-y-1 text-gray-300">
+            <li><strong>WADO-RS:</strong> Retrieve full DICOM instances, series, or raw pixel data via HTTP GET requests.</li>
+            <li><strong>QIDO-RS:</strong> Query studies and series using RESTful URL parameters.</li>
+            <li><strong>STOW-RS:</strong> Upload AI segmentation masks and DICOM Structured Reports (SR) via HTTP POST multipart MIME.</li>
+          </ul>
+
+          <h4 class="text-yellow-400 font-bold mt-4 mb-2 text-sm">2. Interoperability with HL7 FHIR</h4>
+          <p>Model predictions encapsulate as a FHIR <code>DiagnosticReport</code> resource, cross-referencing an <code>ImagingStudy</code> and individual quantitative <code>Observation</code> entities.</p>
+        `
+      }
+    ];
+
+    /* =========================================================================
+       FLASHCARD DRILL REGISTRY (14 CARDS)
+       ========================================================================= */
+    const flashcards = [
+      {
+        cat: "RAD-101: Physics",
+        q: "How does increasing kVp by 15% affect patient dose if mAs is halved simultaneously?",
+        a: "Patient skin entry dose is reduced by approximately 50% while optical receptor exposure remains constant, making this a foundational radiation protection strategy."
+      },
+      {
+        cat: "RAD-102: Patient Care",
+        q: "What is the immediate first-line drug and route for a severe anaphylactoid contrast reaction?",
+        a: "Epinephrine 1:1,000 dilution, 0.3 to 0.5 mg administered via Intramuscular (IM) injection into the anterolateral mid-thigh."
+      },
+      {
+        cat: "RAD-102: Patient Care",
+        q: "How do you distinguish clinically between an anaphylactoid reaction and a severe vasovagal syncope?",
+        a: "Vasovagal reactions feature hypotension paired with BRADYCARDIA (pulse < 60 bpm). Anaphylaxis presents with hypotension paired with TACHYCARDIA."
+      },
+      {
+        cat: "RAD-201: Trauma",
+        q: "What anatomical boundary MUST be visualized on a cross-table horizontal beam lateral C-spine before clearing it?",
+        a: "The C7/T1 junction (superior endplate of T1 must be demonstrated). If obscured by shoulders, a Swimmer's lateral projection is mandatory."
+      },
+      {
+        cat: "RAD-202: Dental",
+        q: "Why is the paralleling technique superior to the bisecting-angle technique in periapical radiography?",
+        a: "The paralleling technique minimizes dimensional distortion and elongation/foreshortening by keeping the receptor parallel to the tooth axis and beam perpendicular."
+      },
+      {
+        cat: "RAD-301: CT Protocols",
+        q: "Why is the Late Arterial Phase (35-40s) essential when imaging suspected Hepatocellular Carcinoma (HCC)?",
+        a: "HCC lesions derive their blood supply from the hepatic artery, causing intense hypervascular enhancement before normal liver parenchyma enhances via the portal vein."
+      },
+      {
+        cat: "RAD-302: MRI Physics",
+        q: "What is the resonant Larmor frequency of hydrogen protons in a 3.0 Tesla clinical MRI scanner?",
+        a: "127.74 MHz (calculated via the Larmor equation: 42.58 MHz/T × 3.0 T)."
+      },
+      {
+        cat: "RAD-401: Radiotherapy",
+        q: "What are the 4 Rs of radiobiology that govern fractional radiotherapy?",
+        a: "Repair (normal tissue recovers), Reoxygenation (hypoxic tumor cells become radiosensitive), Redistribution (cells enter G2/M phase), and Repopulation (tumor cells proliferate if breaks occur)."
+      },
+      {
+        cat: "RAD-402: Quality Assurance",
+        q: "What is the maximum permissible deviation between the collimator light field and the actual radiation field?",
+        a: "The light field and radiation field must align to within ±2% of the Source-to-Image Distance (SID)."
+      },
+      {
+        cat: "RAD-403: Management",
+        q: "What calibration standard is mandatory for diagnostic radiologist review displays under DICOM?",
+        a: "DICOM Part 14 Grayscale Standard Display Function (GSDF) calibration."
+      },
+      {
+        cat: "AI-101: Python",
+        q: "What formula converts raw CT pixel integers into calibrated Hounsfield Units (HU)?",
+        a: "HU = Pixel_Value × Rescale_Slope + Rescale_Intercept (retrieved from the DICOM metadata header tags 0028,1053 and 0028,1052)."
+      },
+      {
+        cat: "AI-201: SQL",
+        q: "What SQL clause is required to filter patients by cumulative radiation dose exceeding 1500 mGy-cm across multiple scans?",
+        a: "The HAVING clause (e.g., HAVING SUM(dlp_mgy_cm) > 1500), because it filters aggregated groupings, unlike WHERE which filters individual rows."
+      },
+      {
+        cat: "AI-301: Machine Learning",
+        q: "Why is the Dice Similarity Coefficient (DSC) preferred over Accuracy for training medical segmentation networks?",
+        a: "Because pathology (e.g. brain tumor voxels) often occupies <1% of the image volume. A naive model predicting 100% background achieves 99% accuracy but a 0.0 Dice score."
+      },
+      {
+        cat: "AI-401: Deep Learning",
+        q: "What architectural feature of the U-Net prevents the loss of fine spatial anatomical boundaries during downsampling?",
+        a: "Skip connections that route high-resolution spatial feature maps directly from encoder stages to corresponding decoder stages."
+      }
+    ];
+
+    /* =========================================================================
+       DIAGNOSTIC EXAM REGISTRY (6 QUESTIONS)
+       ========================================================================= */
+    const quizQuestions = [
+      {
+        modality: "RAD-102: Patient Care & Pharmacology",
+        question: "A patient undergoing an IV contrast-enhanced CT scan becomes dizzy, pale, and nauseated. Vitals reveal BP 82/48 mmHg and Heart Rate 42 bpm. What is the diagnosis and appropriate primary intervention?",
+        options: [
+          "Severe Anaphylactoid Shock: Administer Epinephrine 1:1,000 IM immediately",
+          "Vasovagal Reaction: Place in Trendelenburg position (feet elevated 30°) and monitor; Atropine if bradycardia persists",
+          "Acute Hypoglycemia: Administer 50% Dextrose IV bolus immediately",
+          "Air Embolism: Place in Left Lateral Decubitus position immediately"
+        ],
+        correct: 1,
+        rationale: "The hallmark of a vasovagal reaction is hypotension accompanied by BRADYCARDIA (pulse < 60 bpm). Anaphylaxis presents with tachycardia. Treatment is Trendelenburg positioning, IV fluids, and Atropine 0.5-1.0 mg IV if refractory."
+      },
+      {
+        modality: "RAD-101: Radiation Physics",
+        question: "To reduce patient entrance surface exposure by approximately 50% while maintaining the exact same optical image receptor density, what technical adjustment should you apply?",
+        options: [
+          "Increase mAs by 100% and decrease kVp by 15%",
+          "Increase SID from 100 cm to 180 cm",
+          "Increase kVp by 15% and decrease mAs by 50%",
+          "Switch from a 6:1 anti-scatter grid to a 12:1 anti-scatter grid"
+        ],
+        correct: 2,
+        rationale: "The 15% rule dictates that increasing kVp by 15% doubles exposure. Halving the mAs cuts the patient skin entrance dose by 50% while maintaining net receptor exposure."
+      },
+      {
+        modality: "RAD-301: CT Protocols & Triage",
+        question: "In acute ischemic stroke CT triage, what window width (WW) and window level (WL) settings are applied to maximize contrast between normal brain tissue and cytotoxic edema?",
+        options: [
+          "WL: +400, WW: 1500 (Bone Window)",
+          "WL: -600, WW: 1200 (Lung Window)",
+          "WL: +35 to +40, WW: 80 (Stroke Narrow Brain Window)",
+          "WL: +50, WW: 350 (Abdominal Soft Tissue Window)"
+        ],
+        correct: 2,
+        rationale: "A narrow brain window (WL 35-40, WW 80) accentuates subtle density differences between normal grey-white matter and ischemic cerebral parenchyma, exposing early cortical swelling and insular ribbon blurring."
+      },
+      {
+        modality: "AI-101: Medical Data Science",
+        question: "You have a raw 16-bit CT slice with RescaleSlope = 1.0 and RescaleIntercept = -1024. A pixel value of 1024 corresponds to which anatomical density?",
+        options: [
+          "-1000 HU (Air)",
+          "0 HU (Pure Water)",
+          "+1000 HU (Cortical Bone)",
+          "-100 HU (Adipose Tissue)"
+        ],
+        correct: 1,
+        rationale: "Applying the standard formula HU = Pixel × Slope + Intercept yields: 1024 × 1.0 + (-1024) = 0 HU, which is defined as pure water."
+      },
+      {
+        modality: "AI-301: Diagnostic Machine Learning",
+        question: "When training a model to detect rare intracranial hemorrhages (1.5% prevalence in your dataset), which loss function is best suited to prevent easy background slices from overwhelming gradients?",
+        options: [
+          "Standard Binary Cross-Entropy Loss",
+          "Focal Loss with &gamma; = 2.0",
+          "Mean Squared Error (L2 Loss)",
+          "Categorical Hinge Loss"
+        ],
+        correct: 1,
+        rationale: "Focal Loss applies a modulating factor (1 - pt)^γ that down-weights easy, well-classified background examples, focusing training on hard, rare pathological cases."
+      },
+      {
+        modality: "AI-401: Deep Learning",
+        question: "What core architectural feature of the U-Net makes it uniquely suited for medical image segmentation over standard classification networks?",
+        options: [
+          "Recurrent LSTM memory gates",
+          "Skip connections bridging encoder feature maps to symmetric decoder layers",
+          "Complete removal of convolutional filters",
+          "Exclusively using dilated self-attention with zero pooling"
+        ],
+        correct: 1,
+        rationale: "Skip connections transfer high-resolution spatial coordinates directly from contracting encoder stages to expanding decoder stages, preserving fine anatomical margins that would otherwise be lost to downsampling."
+      }
+    ];
+
+    /* =========================================================================
+       APPLICATION CONTROLLER & EVENT HANDLERS
+       ========================================================================= */
+    let currentFilter = "all";
+    let cardIndex = 0;
+    let cardFlipped = false;
+    let quizIndex = 0;
+    let quizScore = 0;
+    let quizAnswered = false;
+
+    // DOM Initialization
+    document.addEventListener("DOMContentLoaded", () => {
+      renderCourses();
+      loadCard();
+      loadQuiz();
+    });
+
+    // Tab Switching
+    function switchTab(tab) {
+      const tabs = ['curriculum', 'arena', 'convergence'];
+      tabs.forEach(t => {
+        document.getElementById(`section-${t}`).classList.add('hidden');
+        document.getElementById(`tab-${t}`).classList.remove('bg-yellow-500', 'text-black');
+        document.getElementById(`tab-${t}`).classList.add('text-gray-400');
+      });
+      document.getElementById(`section-${tab}`).classList.remove('hidden');
+      document.getElementById(`tab-${tab}`).classList.add('bg-yellow-500', 'text-black');
+      document.getElementById(`tab-${tab}`).classList.remove('text-gray-400');
+    }
+
+    // Render Course Cards
+    function renderCourses() {
+      const grid = document.getElementById("course-grid");
+      const search = document.getElementById("courseSearch").value.toLowerCase();
+      
+      const filtered = courses.filter(c => {
+        const matchesFilter = currentFilter === "all" || c.stream === currentFilter;
+        const matchesSearch = c.title.toLowerCase().includes(search) || 
+                              c.summary.toLowerCase().includes(search) ||
+                              c.badge.toLowerCase().includes(search);
+        return matchesFilter && matchesSearch;
+      });
+
+      grid.innerHTML = filtered.map(c => `
+        <div class="bg-[#0f1015] border border-yellow-500/20 hover:border-yellow-500/50 rounded-2xl p-5 flex flex-col justify-between transition-all duration-200 group">
+          <div>
+            <div class="flex items-center justify-between mb-3">
+              <span class="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-yellow-500/10 text-yellow-400 border border-yellow-500/20">
+                ${c.badge}
+              </span>
+              <i class="fa-solid ${c.icon} text-gray-500 group-hover:text-yellow-400 transition-colors"></i>
+            </div>
+            <h3 class="font-bold text-sm text-gray-100 mb-2 group-hover:text-yellow-400 transition-colors">${c.title}</h3>
+            <p class="text-xs text-gray-400 leading-relaxed mb-4">${c.summary}</p>
+          </div>
+          <button onclick="openModal('${c.id}')" class="w-full py-2 rounded-xl text-xs font-semibold bg-[#161822] text-yellow-400 border border-yellow-500/20 hover:bg-yellow-500 hover:text-black transition-all flex items-center justify-center space-x-1.5">
+            <span>Explore Syllabus & Reference</span>
+            <i class="fa-solid fa-arrow-right text-[10px]"></i>
+          </button>
+        </div>
+      `).join('');
+    }
+
+    function filterCurriculum(type) {
+      currentFilter = type;
+      ['all', 'rad', 'ai'].forEach(t => {
+        const btn = document.getElementById(`btn-filter-${t}`);
+        if(t === type) {
+          btn.className = "px-3 py-1.5 text-xs rounded-lg bg-yellow-500 text-black font-bold";
+        } else {
+          btn.className = "px-3 py-1.5 text-xs rounded-lg bg-[#181a24] text-gray-300 border border-gray-700 hover:border-yellow-500/50";
+        }
+      });
+      renderCourses();
+    }
+
+    function searchCourses() {
+      renderCourses();
+    }
+
+    // Modal Controller
+    function openModal(courseId) {
+      const course = courses.find(c => c.id === courseId);
+      if (!course) return;
+      document.getElementById("modal-stream").innerText = course.stream === 'rad' ? 'Radiological Sciences' : 'Data & AI Systems';
+      document.getElementById("modal-title").innerText = course.title;
+      document.getElementById("modal-icon").innerHTML = `<i class="fa-solid ${course.icon}"></i>`;
+      document.getElementById("modal-body").innerHTML = course.content;
+      document.getElementById("course-modal").classList.remove("hidden");
+    }
+
+    function closeModal() {
+      document.getElementById("course-modal").classList.add("hidden");
+    }
+
+    // Flashcard Controller
+    function loadCard() {
+      const card = flashcards[cardIndex];
+      const inner = document.getElementById("flashcard-inner");
+      cardFlipped = false;
+      inner.classList.remove("rotate-y-180");
+      document.getElementById("card-category").innerText = card.cat;
+      document.getElementById("card-front").innerText = card.q;
+      document.getElementById("card-back").innerText = card.a;
+      document.getElementById("card-counter").innerText = `${cardIndex + 1} / ${flashcards.length}`;
+    }
+
+    function flipCard() {
+      cardFlipped = !cardFlipped;
+      const inner = document.getElementById("flashcard-inner");
+      if (cardFlipped) {
+        inner.classList.add("rotate-y-180");
+      } else {
+        inner.classList.remove("rotate-y-180");
+      }
+    }
+
+    function nextCard() {
+      cardIndex = (cardIndex + 1) % flashcards.length;
+      loadCard();
+    }
+
+    function prevCard() {
+      cardIndex = (cardIndex - 1 + flashcards.length) % flashcards.length;
+      loadCard();
+    }
+
+    // Diagnostic Quiz Controller
+    function loadQuiz() {
+      quizAnswered = false;
+      const q = quizQuestions[quizIndex];
+      document.getElementById("quiz-modality").innerText = q.modality;
+      document.getElementById("quiz-question").innerText = q.question;
+      document.getElementById("quiz-feedback").classList.add("hidden");
+      document.getElementById("quiz-next-btn").classList.add("hidden");
+
+      const optionsDiv = document.getElementById("quiz-options");
+      optionsDiv.innerHTML = q.options.map((opt, idx) => `
+        <button onclick="checkAnswer(${idx})" id="opt-btn-${idx}" class="w-full text-left p-3 rounded-xl border border-gray-800 bg-[#14161f] text-xs text-gray-300 hover:border-yellow-500/50 hover:bg-[#181a26] transition-all">
+          <span class="font-bold text-yellow-400 mr-2">${String.fromCharCode(65 + idx)}.</span> ${opt}
+        </button>
+      `).join('');
+    }
+
+    function checkAnswer(selectedIdx) {
+      if (quizAnswered) return;
+      quizAnswered = true;
+      const q = quizQuestions[quizIndex];
+      const feedback = document.getElementById("quiz-feedback");
+
+      if (selectedIdx === q.correct) {
+        quizScore++;
+        feedback.className = "mt-4 p-3.5 rounded-xl border border-emerald-500/40 bg-emerald-500/10 text-xs text-emerald-300";
+        feedback.innerHTML = `<span class="font-bold"><i class="fa-solid fa-circle-check mr-1"></i> Correct!</span> ${q.rationale}`;
+        document.getElementById(`opt-btn-${selectedIdx}`).classList.add("border-emerald-500", "bg-emerald-500/20");
+      } else {
+        feedback.className = "mt-4 p-3.5 rounded-xl border border-rose-500/40 bg-rose-500/10 text-xs text-rose-300";
+        feedback.innerHTML = `<span class="font-bold"><i class="fa-solid fa-circle-xmark mr-1"></i> Incorrect.</span> ${q.rationale}`;
+        document.getElementById(`opt-btn-${selectedIdx}`).classList.add("border-rose-500", "bg-rose-500/20");
+        document.getElementById(`opt-btn-${q.correct}`).classList.add("border-emerald-500", "bg-emerald-500/20");
+      }
+
+      feedback.classList.remove("hidden");
+      document.getElementById("quiz-next-btn").classList.remove("hidden");
+      document.getElementById("quiz-score").innerText = `Score: ${quizScore} / ${quizIndex + 1}`;
+    }
+
+    function nextQuestion() {
+      quizIndex = (quizIndex + 1) % quizQuestions.length;
+      loadQuiz();
+    }
+
+    // Convergence Simulator
+    function runConvergenceSim() {
+      const pipeline = document.getElementById("conv-pipeline").value;
+      const backend = document.getElementById("conv-backend").value;
+      const log = document.getElementById("conv-log");
+      const btn = document.getElementById("btn-run-sim");
+      
+      btn.disabled = true;
+      btn.classList.add("opacity-50", "cursor-not-allowed");
+
+      log.innerHTML = `<span class="text-yellow-400">> [SYS] Initializing [${pipeline.toUpperCase()}] over [${backend.toUpperCase()}]...</span><br/>`;
+
+      const steps = [
+        "Connecting to PACS DICOMweb endpoint via WADO-RS [Study UID: 1.2.840.113619.2.55.3]...",
+        "Validating DICOM VR Transfer Syntax: Explicit VR Little Endian (1.2.840.10008.1.2.1)...",
+        "Loading volumetric pixel matrix (512x512x240 slices, slice thickness 0.625mm)...",
+        "Applying HU calibration: HU = pixel * Slope + Intercept...",
+        "Executing window/level normalization (WL: 40, WW: 80) -> Float32 tensor [1, 1, 240, 512, 512]...",
+        `Allocating GPU VRAM on accelerator core (${backend === 'tensorrt' ? 'NVIDIA TensorRT FP16' : 'Active Backend'})...`,
+        "Executing forward inference pass across volumetric bounding boxes...",
+        "Generating DICOM Structured Report (SR) with segmentation overlay...",
+        "Status: 0 Errors, 0 Warnings. Target finding confidence: 97.4%. Ready for Radiologist sign-off."
+      ];
+
+      steps.forEach((step, idx) => {
+        setTimeout(() => {
+          log.innerHTML += `<span class="text-gray-300">> ${step}</span><br/>`;
+          const terminal = document.getElementById("conv-terminal");
+          terminal.scrollTop = terminal.scrollHeight;
+
+          if (idx === steps.length - 1) {
+            btn.disabled = false;
+            btn.classList.remove("opacity-50", "cursor-not-allowed");
+            document.getElementById("telemetry-latency").innerText = `LATENCY: ${(14 + Math.random() * 8).toFixed(1)} ms`;
+          }
+        }, (idx + 1) * 320);
+      });
+    }
+  </script>
+</body>
+</html>

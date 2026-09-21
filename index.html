@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>JARVIS // Dual Study Engine & Convergence Lab (v3.2 Fixed)</title>
+  <title>JARVIS // Dual Study Engine & Convergence Lab (v3.3 Master Edition)</title>
   
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -33,7 +33,6 @@
     }
     .orbitron { font-family: 'Orbitron', sans-serif; }
     
-    /* Cyber Gold Aesthetics */
     .border-gold-glow {
       border: 1px solid rgba(234, 179, 8, 0.25);
       box-shadow: 0 0 15px rgba(234, 179, 8, 0.08);
@@ -59,13 +58,11 @@
       transform: translateY(-1px);
     }
     
-    /* 3D Flip Flashcard */
     .perspective-1000 { perspective: 1000px; }
     .transform-style-3d { transform-style: preserve-3d; }
     .backface-hidden { backface-visibility: hidden; }
     .rotate-y-180 { transform: rotateY(180deg); }
     
-    /* Custom Scrollbar */
     ::-webkit-scrollbar { width: 6px; height: 6px; }
     ::-webkit-scrollbar-track { background: #070709; }
     ::-webkit-scrollbar-thumb { background: #374151; border-radius: 3px; }
@@ -84,7 +81,7 @@
         <div>
           <div class="orbitron font-bold text-lg tracking-wider gold-gradient-text flex items-center space-x-2">
             <span>JARVIS // DUAL NEXUS</span>
-            <span class="text-[9px] uppercase px-2 py-0.5 bg-yellow-500/20 text-yellow-400 border border-yellow-500/30 rounded font-mono">v3.2 ONLINE</span>
+            <span class="text-[9px] uppercase px-2 py-0.5 bg-yellow-500/20 text-yellow-400 border border-yellow-500/30 rounded font-mono">v3.3 MASTER</span>
           </div>
           <p class="text-[11px] text-gray-400">Radiological Sciences &times; Healthcare AI & Automation</p>
         </div>
@@ -110,7 +107,6 @@
 
     <!-- ==================== SECTION 1: CURRICULUM ==================== -->
     <section id="section-curriculum" class="space-y-6">
-      <!-- Stream Switcher & Search Bar -->
       <div class="bg-[#0f1015] border border-yellow-500/20 rounded-2xl p-4 flex flex-col md:flex-row items-center justify-between gap-4">
         <div class="flex flex-wrap items-center gap-2">
           <span class="text-xs text-yellow-500 font-bold uppercase tracking-wider mr-2"><i class="fa-solid fa-filter mr-1"></i> Stream:</span>
@@ -163,7 +159,6 @@
             </div>
           </div>
 
-          <!-- Controls -->
           <div class="flex items-center justify-between mt-6 pt-4 border-t border-gray-800">
             <button onclick="prevCard()" class="px-4 py-1.5 rounded-lg text-xs bg-[#181a24] text-gray-300 hover:text-yellow-400 border border-gray-700">
               <i class="fa-solid fa-chevron-left mr-1"></i> Previous
@@ -191,7 +186,6 @@
               <!-- Rendered via JS -->
             </div>
 
-            <!-- Feedback Alert -->
             <div id="quiz-feedback" class="hidden mt-4 p-3.5 rounded-xl border text-xs leading-relaxed"></div>
           </div>
 
@@ -219,7 +213,6 @@
         </div>
 
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-          <!-- Simulation Parameters -->
           <div class="space-y-4">
             <div>
               <label class="text-xs text-gray-300 font-semibold block mb-1.5">Clinical AI Pipeline</label>
@@ -248,10 +241,9 @@
             </button>
           </div>
 
-          <!-- Terminal Monitor -->
           <div class="lg:col-span-2 bg-[#08090c] border border-yellow-500/30 rounded-xl p-4 font-mono text-xs text-gray-300 h-72 overflow-y-auto flex flex-col justify-between" id="conv-terminal">
             <div id="conv-log" class="space-y-1">
-              <span class="text-gray-500">// JARVIS Convergence Diagnostic Sandbox v3.2</span><br/>
+              <span class="text-gray-500">// JARVIS Convergence Diagnostic Sandbox v3.3</span><br/>
               <span class="text-yellow-400">> System standing by. Configure clinical target and trigger inference.</span>
             </div>
             <div class="text-[10px] text-gray-500 border-t border-gray-800 pt-2 flex flex-wrap justify-between gap-2 mt-4 font-mono">
@@ -295,95 +287,47 @@
        ACADEMIC CURRICULUM REGISTRY (14 COURSES)
        ========================================================================= */
     const courses = [
-      // 1. RAD-101: Radiation Physics & Technique
+      // 1. RAD-101
       {
         id: "rad_101",
         stream: "rad",
         title: "RAD-101: Radiation Physics & Exposure Dynamics",
         badge: "Physics Foundation",
         icon: "fa-sliders",
-        summary: "Master Bremsstrahlung vs. Characteristic physics, the 15% rule, inverse/direct square laws, anti-scatter grids, and focal spot blur.",
+        summary: "Bremsstrahlung vs. Characteristic physics, the 15% rule, inverse/direct square laws, anti-scatter grids, and focal spot blur.",
         content: `
           <div class="bg-[#12141d] p-4 rounded-xl border border-yellow-500/30">
-            <h4 class="text-yellow-400 font-bold mb-1 text-sm flex items-center">
-              <i class="fa-solid fa-lightbulb mr-2 text-yellow-500"></i>1. Core Intuition (The Plain-English Concept)
-            </h4>
-            <p class="text-gray-300 text-xs leading-relaxed">
-              <strong>Making X-Rays:</strong> Think of firing electrons at a massive tungsten wall. 99% of their kinetic energy turns into heat, and only 1% produces X-ray photons. 
-              <em>Bremsstrahlung ("braking radiation")</em> happens when an electron slows down and swerves around a tungsten nucleus, emitting continuous-spectrum photons. 
-              <em>Characteristic radiation</em> occurs when an electron knocks out an inner K-shell electron; an outer electron drops in to fill the hole, producing a discrete spike at 69.5 keV.<br><br>
-              <strong>kVp vs. mAs:</strong> <em>kVp</em> is the speed and penetrating power (quality). <em>mAs</em> is the total number of photons fired (quantity). 
-              <strong>Scatter:</strong> Photons bouncing off patient tissues like headlights in dense fog create a gray haze (Compton scatter). Anti-scatter grids act like window blinds, absorbing angled scatter while letting straight, image-forming photons reach the receptor.
-            </p>
+            <h4 class="text-yellow-400 font-bold mb-1 text-sm flex items-center"><i class="fa-solid fa-lightbulb mr-2 text-yellow-500"></i>1. Core Intuition</h4>
+            <p class="text-gray-300 text-xs leading-relaxed">X-ray production: 99% heat, 1% X-rays. Bremsstrahlung produces a continuous spectrum as electrons decelerate near tungsten nuclei. Characteristic produces discrete peaks (69.5 keV for W) when K-shell electrons are ejected. kVp controls photon quality/penetration; mAs controls total photon quantity. Scatter (Compton) causes fog; grids remove scatter before it reaches the receptor.</p>
           </div>
-
           <div class="bg-[#12141d] p-4 rounded-xl border border-yellow-500/30">
-            <h4 class="text-yellow-400 font-bold mb-2 text-sm flex items-center">
-              <i class="fa-solid fa-square-root-variable mr-2 text-yellow-500"></i>2. Exact Scientific Formulas & Rules
-            </h4>
+            <h4 class="text-yellow-400 font-bold mb-2 text-sm flex items-center"><i class="fa-solid fa-square-root-variable mr-2 text-yellow-500"></i>2. Exact Scientific Formulas & Rules</h4>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-3 font-mono text-[11px]">
-              <div class="bg-black/60 p-2.5 rounded border border-gray-800">
-                <span class="text-yellow-400 font-bold">Inverse Square Law (Dose):</span><br/>
-                I1 / I2 = (d2 / d1)^2
-              </div>
-              <div class="bg-black/60 p-2.5 rounded border border-gray-800">
-                <span class="text-yellow-400 font-bold">Direct Square Law (mAs):</span><br/>
-                mAs1 / mAs2 = (SID1 / SID2)^2
-              </div>
-              <div class="bg-black/60 p-2.5 rounded border border-gray-800">
-                <span class="text-yellow-400 font-bold">Grid Conversion Factor (GCF):</span><br/>
-                mAs2 = mAs1 &times; (GCF2 / GCF1)<br/>
-                <span class="text-gray-500 text-[10px]">No grid: 1 | 5:1: 2 | 6:1: 3 | 8:1: 4 | 12:1: 5 | 16:1: 6</span>
-              </div>
-              <div class="bg-black/60 p-2.5 rounded border border-gray-800">
-                <span class="text-yellow-400 font-bold">Focal Spot Blur (FSB):</span><br/>
-                FSB = Effective Focal Spot &times; (OID / SOD)<br/>
-                <span class="text-gray-500 text-[10px]">where SOD = SID - OID</span>
-              </div>
+              <div class="bg-black/60 p-2.5 rounded border border-gray-800"><span class="text-yellow-400 font-bold">Inverse Square Law:</span><br/>I1 / I2 = (d2 / d1)^2</div>
+              <div class="bg-black/60 p-2.5 rounded border border-gray-800"><span class="text-yellow-400 font-bold">Direct Square Law (mAs):</span><br/>mAs1 / mAs2 = (SID1 / SID2)^2</div>
+              <div class="bg-black/60 p-2.5 rounded border border-gray-800"><span class="text-yellow-400 font-bold">Grid Conversion Factor:</span><br/>mAs2 = mAs1 &times; (GCF2 / GCF1)<br/><span class="text-gray-500 text-[10px]">No grid:1 | 5:1:2 | 6:1:3 | 8:1:4 | 12:1:5 | 16:1:6</span></div>
+              <div class="bg-black/60 p-2.5 rounded border border-gray-800"><span class="text-yellow-400 font-bold">Focal Spot Blur (FSB):</span><br/>FSB = Focal Spot &times; (OID / SOD)</div>
             </div>
             <div class="mt-3 bg-yellow-500/10 p-2.5 rounded border border-yellow-500/30 text-yellow-300 text-xs">
-              <strong>The 15% kVp Rule (ALARA Principle):</strong> Increasing kVp by 15% doubles receptor exposure. To cut patient dose by ~50% while preserving optical density: <em>Increase kVp by 15% and decrease mAs by 50%</em>.
+              <strong>15% Rule:</strong> +15% kVp doubles receptor exposure; to cut patient dose by 50%: +15% kVp and -50% mAs.
             </div>
           </div>
-
           <div class="bg-[#12141d] p-4 rounded-xl border border-yellow-500/30">
-            <h4 class="text-yellow-400 font-bold mb-2 text-sm flex items-center">
-              <i class="fa-solid fa-calculator mr-2 text-yellow-500"></i>3. Step-by-Step Worked Practice Problems
-            </h4>
-            <div class="space-y-3 text-xs">
-              <div class="p-3 bg-black/50 rounded-lg border border-gray-800">
-                <p class="font-bold text-gray-200 mb-1">Problem A: Distance & Exposure Maintenance</p>
-                <p class="text-gray-400 mb-2">A mobile AP chest radiograph at 100 cm SID uses 80 kVp and 4 mAs. The patient is moved to a bay where space allows a full 180 cm SID. What new mAs maintains identical receptor exposure?</p>
-                <p class="text-yellow-300 font-mono text-[11px]">
-                  1. Ratio = 180 / 100 = 1.8<br/>
-                  2. Square ratio = 1.8^2 = 3.24<br/>
-                  3. New mAs = 4 &times; 3.24 = <strong>12.96 mAs (~13 mAs)</strong>
-                </p>
-              </div>
-
-              <div class="p-3 bg-black/50 rounded-lg border border-gray-800">
-                <p class="font-bold text-gray-200 mb-1">Problem B: Grid Transition Calculation</p>
-                <p class="text-gray-400 mb-2">A knee radiograph taken non-grid at 60 kVp and 2.5 mAs requires repeat with an 8:1 grid (GCF = 4) due to patient size. Calculate new mAs.</p>
-                <p class="text-yellow-300 font-mono text-[11px]">
-                  mAs2 = 2.5 &times; (4 / 1) = <strong>10 mAs</strong>.
-                </p>
-              </div>
+            <h4 class="text-yellow-400 font-bold mb-2 text-sm flex items-center"><i class="fa-solid fa-calculator mr-2 text-yellow-500"></i>3. Worked Practice Problem</h4>
+            <div class="p-3 bg-black/50 rounded-lg border border-gray-800 text-xs">
+              <p class="font-bold text-gray-200 mb-1">Problem: Distance & Exposure Maintenance</p>
+              <p class="text-gray-400 mb-2">AP Chest at 100 cm SID uses 80 kVp and 4 mAs. If moved to 180 cm SID, what is the new mAs required?</p>
+              <p class="text-yellow-300 font-mono text-[11px]">Ratio = 180/100 = 1.8 &rarr; 1.8^2 = 3.24 &rarr; New mAs = 4 &times; 3.24 = <strong>12.96 mAs (~13 mAs)</strong>.</p>
             </div>
           </div>
-
           <div class="bg-[#12141d] p-4 rounded-xl border border-rose-500/30">
-            <h4 class="text-rose-400 font-bold mb-2 text-sm flex items-center">
-              <i class="fa-solid fa-triangle-exclamation mr-2 text-rose-500"></i>4. Common Traps & Clinical Pitfalls
-            </h4>
-            <ul class="list-disc pl-5 space-y-1.5 text-xs text-gray-300">
-              <li><strong>Inverse Square vs. Direct Square Trap:</strong> Use <em>Inverse Square</em> to calculate radiation dose/intensity (doubling distance cuts dose to 1/4). Use <em>Direct Square</em> to calculate mAs technique (doubling distance requires 4&times; mAs).</li>
-              <li><strong>Upside-Down Focused Grid Disaster:</strong> Placing a focused grid upside down passes the central ray but absorbs the angled beam at the periphery, leaving the radiograph dark in the center and totally white/blank on both edges.</li>
-            </ul>
+            <h4 class="text-rose-400 font-bold mb-2 text-sm flex items-center"><i class="fa-solid fa-triangle-exclamation mr-2 text-rose-500"></i>4. Traps & Pitfalls</h4>
+            <p class="text-gray-300 text-xs">Do not confuse the Inverse Square Law (measures radiation intensity/dose) with the Direct Square Law (used to calculate mAs technique adjustments). Placing a focused grid upside down absorbs the beam periphery, making the sides completely blank.</p>
           </div>
         `
       },
 
-      // 2. RAD-102: Patient Care & Pharmacology
+      // 2. RAD-102
       {
         id: "rad_102",
         stream: "rad",
@@ -393,128 +337,82 @@
         summary: "Emergency contrast triage ladder, IM Epinephrine dosing, vasovagal bradycardia protocols, and infection control precautions.",
         content: `
           <div class="bg-[#12141d] p-4 rounded-xl border border-yellow-500/30">
-            <h4 class="text-yellow-400 font-bold mb-1 text-sm flex items-center">
-              <i class="fa-solid fa-lightbulb mr-2 text-yellow-500"></i>1. Core Intuition (The Plain-English Concept)
-            </h4>
-            <p class="text-gray-300 text-xs leading-relaxed">
-              <strong>Why Contrast Works:</strong> Blood vessels and soft tissues have similar radiopacity. High-Z iodinated contrast (Z=53) opacifies the vascular tree and tumors. 
-              Because contrast media are hyperosmolar, warm flushing and metallic taste are normal physiological responses. However, mast-cell degranulation can trigger an <em>anaphylactoid reaction</em>, while intense anxiety or pain can trigger a <em>vasovagal syncope</em>.<br><br>
-              <strong>Infection Transmission:</strong> Standard precautions apply to all body fluids. Hand hygiene with soap and water is mandatory for spore-forming pathogens like <em>C. diff</em> because alcohol-based rubs cannot penetrate spore coats.
-            </p>
+            <h4 class="text-yellow-400 font-bold mb-1 text-sm flex items-center"><i class="fa-solid fa-lightbulb mr-2 text-yellow-500"></i>1. Core Intuition</h4>
+            <p class="text-gray-300 text-xs leading-relaxed">Contrast opacifies vessels and organs because iodine (Z=53) has high photoelectric absorption. Due to hyperosmolality, warm flushing is normal. Severe reactions are either anaphylactoid (mast cell degranulation) or vasovagal (vagus nerve overstimulation). C. diff spores resist alcohol; soap and water handwashing is mandatory.</p>
           </div>
-
           <div class="bg-[#12141d] p-4 rounded-xl border border-yellow-500/30">
-            <h4 class="text-yellow-400 font-bold mb-2 text-sm flex items-center">
-              <i class="fa-solid fa-kit-medical mr-2 text-yellow-500"></i>2. Contrast Reaction Triage Ladder
-            </h4>
-            <div class="overflow-x-auto">
-              <table class="w-full text-left text-[11px] border border-gray-800">
-                <thead class="bg-black/70 text-yellow-400 font-bold">
-                  <tr>
-                    <th class="p-2 border-b border-gray-800">Severity</th>
-                    <th class="p-2 border-b border-gray-800">Symptoms</th>
-                    <th class="p-2 border-b border-gray-800">Immediate Action</th>
-                  </tr>
-                </thead>
-                <tbody class="divide-y divide-gray-800 text-gray-300">
-                  <tr>
-                    <td class="p-2 font-bold text-gray-200">Mild</td>
-                    <td class="p-2">Scattered urticaria, pruritus, rhinorrhea</td>
-                    <td class="p-2">Observation, reassurance, monitor vitals 20-30 min.</td>
-                  </tr>
-                  <tr>
-                    <td class="p-2 font-bold text-amber-300">Moderate</td>
-                    <td class="p-2">Diffuse erythema, facial edema without stridor, wheezing</td>
-                    <td class="p-2">Diphenhydramine 25-50 mg IV/oral; Albuterol inhaler for wheeze.</td>
-                  </tr>
-                  <tr>
-                    <td class="p-2 font-bold text-rose-400">Severe Anaphylaxis</td>
-                    <td class="p-2">Laryngeal stridor, hypoxia, BP &lt; 90 with <strong>TACHYCARDIA</strong></td>
-                    <td class="p-2 text-rose-300 font-bold">Epinephrine 1:1,000 (0.3 - 0.5 mg IM) anterolateral thigh + High-flow O2 + Rapid Response.</td>
-                  </tr>
-                  <tr>
-                    <td class="p-2 font-bold text-cyan-300">Vasovagal Syncope</td>
-                    <td class="p-2">Diaphoresis, fainting, BP &lt; 90 with <strong>BRADYCARDIA (HR &lt; 60)</strong></td>
-                    <td class="p-2 text-cyan-300 font-bold">Trendelenburg position (feet elevated 30&deg;), IV fluids; Atropine 0.5 - 1.0 mg IV if HR &lt; 50.</td>
-                  </tr>
-                </tbody>
+            <h4 class="text-yellow-400 font-bold mb-2 text-sm flex items-center"><i class="fa-solid fa-kit-medical mr-2 text-yellow-500"></i>2. Contrast Reaction Triage Ladder</h4>
+            <div class="overflow-x-auto text-[11px]">
+              <table class="w-full text-left border border-gray-800">
+                <tr class="bg-black/70 text-yellow-400"><th class="p-2">Severity</th><th class="p-2">Symptoms</th><th class="p-2">Immediate Action</th></tr>
+                <tr class="border-t border-gray-800"><td class="p-2 font-bold">Mild</td><td class="p-2">Scattered hives, pruritus</td><td class="p-2">Observe vitals 20-30 min.</td></tr>
+                <tr class="border-t border-gray-800"><td class="p-2 font-bold text-amber-300">Moderate</td><td class="p-2">Facial edema, wheezing</td><td class="p-2">Diphenhydramine 25-50 mg IV/oral, Albuterol inhaler.</td></tr>
+                <tr class="border-t border-gray-800"><td class="p-2 font-bold text-rose-400">Severe</td><td class="p-2">Stridor, BP &lt; 90 + Tachycardia</td><td class="p-2 text-rose-300 font-bold">Epinephrine 1:1,000 (0.3-0.5 mg IM) thigh + O2 + Code team.</td></tr>
+                <tr class="border-t border-gray-800"><td class="p-2 font-bold text-cyan-300">Vasovagal</td><td class="p-2">Fainting, BP &lt; 90 + BRADYCARDIA</td><td class="p-2 text-cyan-300 font-bold">Trendelenburg (feet up 30&deg;), IV fluids, Atropine 0.5-1.0 mg IV.</td></tr>
               </table>
             </div>
           </div>
-
-          <div class="bg-[#12141d] p-4 rounded-xl border border-yellow-500/30">
-            <h4 class="text-yellow-400 font-bold mb-2 text-sm flex items-center">
-              <i class="fa-solid fa-notes-medical mr-2 text-yellow-500"></i>3. Step-by-Step Worked Clinical Case Studies
-            </h4>
-            <div class="p-3 bg-black/50 rounded-lg border border-gray-800 text-xs">
-              <p class="font-bold text-gray-200 mb-1">Case A: The Collapsed Patient Triage</p>
-              <p class="text-gray-400 mb-2">Post-CT chest contrast, a 45-year-old male collapses. Monitor shows BP 80/45 mmHg and Heart Rate 42 bpm. Differentiate and treat.</p>
-              <div class="text-yellow-300 font-mono text-[11px] space-y-1">
-                <p>1. <strong>Evaluation:</strong> Hypotension paired with <strong>severe bradycardia (42 bpm)</strong> = Vasovagal Syncope (anaphylaxis causes tachycardia).</p>
-                <p>2. <strong>Action:</strong> Immediately place in Trendelenburg position (feet elevated 30&deg;). Open IV fluids wide. Administer O2.</p>
-                <p>3. <strong>Pharmacology:</strong> If heart rate does not rebound >50 bpm within 1-2 minutes, administer <strong>Atropine 0.5 - 1.0 mg IV</strong>.</p>
-                <p>4. <em>Do NOT give Epinephrine</em> (can trigger severe arrhythmias in an uncomplicated vasovagal event).</p>
-              </div>
-            </div>
-          </div>
-
           <div class="bg-[#12141d] p-4 rounded-xl border border-rose-500/30">
-            <h4 class="text-rose-400 font-bold mb-2 text-sm flex items-center">
-              <i class="fa-solid fa-triangle-exclamation mr-2 text-rose-500"></i>4. Common Traps & Clinical Pitfalls
-            </h4>
-            <ul class="list-disc pl-5 space-y-1.5 text-xs text-gray-300">
-              <li><strong>The Epinephrine Route Trap:</strong> Epinephrine <strong>1:1,000</strong> is strictly for <strong>Intramuscular (IM)</strong> injection into the thigh. Never give 1:1,000 IV push; it can cause fatal arrhythmias. (IV cardiac arrest dilution is 1:10,000).</li>
-              <li><strong>The Extravasation Heat Trap:</strong> If IV contrast extravasates into tissue, <strong>apply cold compresses</strong>, not heat. Cold causes vasoconstriction and limits edema; heat causes vasodilation, increasing compartment pressure.</li>
-            </ul>
+            <h4 class="text-rose-400 font-bold mb-2 text-sm flex items-center"><i class="fa-solid fa-triangle-exclamation mr-2 text-rose-500"></i>3. Traps & Pitfalls</h4>
+            <p class="text-gray-300 text-xs">Never administer Epinephrine 1:1,000 IV (it is strictly for IM use in the thigh; IV use can trigger fatal cardiac arrest). If contrast extravasates, use a cold pack (vasoconstriction), never heat.</p>
           </div>
         `
       },
 
-      // 3. RAD-201: Trauma & Emergency Radiography
+      // 3. RAD-201
       {
         id: "rad_201",
         stream: "rad",
         title: "RAD-201: Trauma & Emergency Radiography (A&E Clearance)",
         badge: "Trauma Protocol",
         icon: "fa-person-falling-burst",
-        summary: "Horizontal beam lateral C-spine clearance, Swimmer's view, tension pneumothorax markers, and open pelvis series.",
+        summary: "Cross-table lateral C-spine clearance, Swimmer's projection, open pelvic ring trauma, and tension pneumothorax markers.",
         content: `
-          <h4 class="text-yellow-400 font-bold mb-2 text-sm">1. Trauma Cervical Spine Clearance</h4>
-          <p>Cross-table horizontal beam lateral projection must be acquired without moving the patient or removing the rigid cervical collar. <strong>Non-negotiable requirement:</strong> Clear demonstration from C1 down through the superior endplate of T1. If shoulders obscure C7/T1, perform a Swimmer's projection (Twining method) or proceed immediately to emergent CT.</p>
-
-          <h4 class="text-yellow-400 font-bold mt-4 mb-2 text-sm">2. Tension Pneumothorax & Critical Chest Markers</h4>
-          <p>Radiographic signs of life-threatening tension pneumothorax include: ipsilateral lung collapse, complete depression of the hemidiaphragm, and contralateral deviation of the trachea and mediastinum. This is a clinical emergency requiring immediate needle decompression prior to definitive chest tube insertion.</p>
-
-          <h4 class="text-yellow-400 font-bold mt-4 mb-2 text-sm">3. Pelvic Trauma Series</h4>
-          <p>Evaluate for disruption of the pelvic ring (Malgaigne or open-book fractures) and pubic symphysis diastasis (> 1 cm). <em>Caution:</em> Never attempt internal rotation of the lower limbs if hip fracture or pelvic ring disruption is clinically suspected.</p>
+          <div class="bg-[#12141d] p-4 rounded-xl border border-yellow-500/30">
+            <h4 class="text-yellow-400 font-bold mb-1 text-sm flex items-center"><i class="fa-solid fa-lightbulb mr-2 text-yellow-500"></i>1. Core Intuition</h4>
+            <p class="text-gray-300 text-xs leading-relaxed">In trauma resuscitation, never move a patient with an uncleared spine. Horizontal-beam cross-table projections allow full imaging without moving the patient or removing the rigid collar. High-energy pelvic disruptions almost always break the pelvic ring in at least two places (the pretzel rule).</p>
+          </div>
+          <div class="bg-[#12141d] p-4 rounded-xl border border-yellow-500/30">
+            <h4 class="text-yellow-400 font-bold mb-2 text-sm flex items-center"><i class="fa-solid fa-bone mr-2 text-yellow-500"></i>2. Critical Clearance Landmarks</h4>
+            <ul class="list-disc pl-5 space-y-1 text-xs text-gray-300">
+              <li><strong>C-Spine Clearance:</strong> Must demonstrate C1 through the superior endplate of T1. If obscured by shoulders, perform a Swimmer's lateral (Twining method) or immediate CT.</li>
+              <li><strong>Prevertebral Soft Tissue:</strong> Retropharyngeal (C1-C4) &le; 6-7 mm; Retrotracheal (C5-C7) &le; 22 mm.</li>
+              <li><strong>Tension Pneumothorax:</strong> Diaphragm depression, tracheal shift to contralateral side, lung collapse. Requires immediate needle decompression.</li>
+            </ul>
+          </div>
+          <div class="bg-[#12141d] p-4 rounded-xl border border-rose-500/30">
+            <h4 class="text-rose-400 font-bold mb-2 text-sm flex items-center"><i class="fa-solid fa-triangle-exclamation mr-2 text-rose-500"></i>3. Traps & Pitfalls</h4>
+            <p class="text-gray-300 text-xs">Never internally rotate the legs on a trauma pelvis if a hip fracture or pelvic ring disruption is suspected. Never clear a C-spine without visualizing C7/T1.</p>
+          </div>
         `
       },
 
-      // 4. RAD-202: Dental & Maxillofacial Radiography
+      // 4. RAD-202
       {
         id: "rad_202",
         stream: "rad",
         title: "RAD-202: Dental & Maxillofacial Radiography",
         badge: "Maxillofacial",
         icon: "fa-tooth",
-        summary: "Paralleling vs. bisecting angle techniques, OPG focal trough geometry, and ghost artifact prevention.",
+        summary: "Paralleling vs. bisecting angle, OPG focal trough geometry, ghost artifacts, and Waters view for facial trauma.",
         content: `
-          <h4 class="text-yellow-400 font-bold mb-2 text-sm">1. Intraoral Imaging: Paralleling vs. Bisecting Angle</h4>
-          <ul class="list-disc pl-5 space-y-1 text-gray-300">
-            <li><strong>Paralleling Technique (Long-Cone):</strong> Image receptor is placed parallel to the long axis of the tooth; central ray is directed perpendicular to both. Eliminates geometric distortion and is the clinical gold standard.</li>
-            <li><strong>Bisecting-Angle Technique:</strong> Central ray is directed perpendicular to the imaginary angle bisector between tooth axis and receptor plane. Prone to foreshortening (central ray angle too steep) and elongation (angle too shallow).</li>
-          </ul>
-
-          <h4 class="text-yellow-400 font-bold mt-4 mb-2 text-sm">2. Orthopantomography (OPG) Positioning Errors</h4>
-          <ul class="list-disc pl-5 space-y-1 text-gray-300">
-            <li><strong>Tongue off palate:</strong> Creates a dark radiolucent air shadow over maxillary root apices.</li>
-            <li><strong>Patient slumped:</strong> Ghost shadow of the cervical spine superimposes over the midline mandibular structures.</li>
-            <li><strong>Head tilted up:</strong> Frankfort plane tilted upwards causes flattened occlusal plane ("reverse smile") and hard palate shadow over maxillary roots.</li>
-          </ul>
+          <div class="bg-[#12141d] p-4 rounded-xl border border-yellow-500/30">
+            <h4 class="text-yellow-400 font-bold mb-1 text-sm flex items-center"><i class="fa-solid fa-lightbulb mr-2 text-yellow-500"></i>1. Core Intuition</h4>
+            <p class="text-gray-300 text-xs leading-relaxed">The paralleling technique is the gold standard because it places the receptor parallel to the tooth axis, eliminating geometric distortion. Panoramic OPG uses a rotating tube and detector to form a curved focal trough; objects outside this trough appear blurred, magnified, or as contralateral ghost artifacts.</p>
+          </div>
+          <div class="bg-[#12141d] p-4 rounded-xl border border-yellow-500/30">
+            <h4 class="text-yellow-400 font-bold mb-2 text-sm flex items-center"><i class="fa-solid fa-tooth mr-2 text-yellow-500"></i>2. Positioning Errors & Solutions</h4>
+            <ul class="list-disc pl-5 space-y-1 text-xs text-gray-300">
+              <li><strong>Tongue off palate:</strong> Creates a dark radiolucent air shadow over maxillary root apices.</li>
+              <li><strong>Patient slumped:</strong> Ghost shadow of the cervical spine superimposes as a dense pyramid over anterior teeth.</li>
+              <li><strong>Patient too far forward:</strong> Anterior teeth are blurred and horizontally compressed (narrowed).</li>
+              <li><strong>Waters View (Parietocanthial):</strong> OML forms 37&deg; angle with receptor; petrous ridges must lie immediately below the floor of the maxillary sinuses.</li>
+            </ul>
+          </div>
         `
       },
 
-      // 5. RAD-301: CT Physics, Protocols & Dose
+      // 5. RAD-301
       {
         id: "rad_301",
         stream: "rad",
@@ -523,25 +421,22 @@
         icon: "fa-compact-disc",
         summary: "MDCT slip-rings, Pitch dynamics, CTDIvol/DLP/SSDE metrics, multiphasic liver, and acute stroke ASPECTS scoring.",
         content: `
-          <h4 class="text-yellow-400 font-bold mb-2 text-sm">1. Pitch and Dose Dynamics</h4>
-          <div class="bg-black/60 p-2.5 rounded border border-yellow-500/20 font-mono text-yellow-300 my-2">
-            Pitch = Table Distance per Gantry Rotation / Total Beam Collimation
+          <div class="bg-[#12141d] p-4 rounded-xl border border-yellow-500/30">
+            <h4 class="text-yellow-400 font-bold mb-1 text-sm flex items-center"><i class="fa-solid fa-lightbulb mr-2 text-yellow-500"></i>1. Core Intuition</h4>
+            <p class="text-gray-300 text-xs leading-relaxed">CT uses filtered back-projection or iterative reconstruction to build cross-sectional attenuation maps. Pitch describes table movement per rotation relative to beam collimation. Multiphasic imaging capitalizes on dual blood supplies (e.g., hepatic artery vs. portal vein) to characterize lesions.</p>
           </div>
-          <p>Pitch > 1 produces non-overlapping helices, reducing patient dose and scan time with a minor loss of z-axis slice sensitivity profile. Pitch < 1 overlaps slices, increasing patient dose but enhancing 3D multiplanar reformatting.</p>
-
-          <h4 class="text-yellow-400 font-bold mt-4 mb-2 text-sm">2. Multiphasic Liver Dynamics</h4>
-          <ul class="list-disc pl-5 space-y-1 text-gray-300">
-            <li><strong>Late Arterial (35-40s):</strong> Peak enhancement of hypervascular lesions (Hepatocellular Carcinoma - HCC) supplied via hepatic artery.</li>
-            <li><strong>Portal Venous (70-80s):</strong> Peak enhancement of background hepatic parenchyma (75-80% portal supply). Hypovascular metastases appear dark.</li>
-            <li><strong>Equilibrium / Delayed (3-5 min):</strong> Washout of HCC; persistent delayed enhancement of fibrous stroma (cholangiocarcinoma).</li>
-          </ul>
-
-          <h4 class="text-yellow-400 font-bold mt-4 mb-2 text-sm">3. Acute Stroke Triage & ASPECTS</h4>
-          <p>Non-contrast CT head rules out hemorrhage (+60 to +80 HU). Ischemic changes are quantified via <strong>ASPECTS</strong> (Alberta Stroke Program Early CT Score, 0-10 scale) on narrow stroke windows (WL: 35-40, WW: 80).</p>
+          <div class="bg-[#12141d] p-4 rounded-xl border border-yellow-500/30">
+            <h4 class="text-yellow-400 font-bold mb-2 text-sm flex items-center"><i class="fa-solid fa-calculator mr-2 text-yellow-500"></i>2. CT Physics Formulas</h4>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-2 font-mono text-[11px]">
+              <div class="bg-black/60 p-2 rounded">Pitch = Table Distance per Turn / Total Collimation</div>
+              <div class="bg-black/60 p-2 rounded">DLP = CTDIvol &times; Scan Length (cm)</div>
+            </div>
+            <p class="text-xs text-gray-300 mt-2"><strong>Triphasic Liver:</strong> Late Arterial (35-40s) shows HCC wash-in; Portal Venous (70-80s) shows normal liver enhancement; Delayed (3-5 min) shows HCC washout.</p>
+          </div>
         `
       },
 
-      // 6. RAD-302: MRI Physics & Bio-effects
+      // 6. RAD-302
       {
         id: "rad_302",
         stream: "rad",
@@ -550,24 +445,18 @@
         icon: "fa-magnet",
         summary: "Larmor equation, T1/T2 relaxation, pulse sequences (SE, TSE, FLAIR, STIR), and ACR Safety Zones I-IV.",
         content: `
-          <h4 class="text-yellow-400 font-bold mb-2 text-sm">1. The Larmor Equation & Precession</h4>
-          <div class="bg-black/60 p-2.5 rounded border border-yellow-500/20 font-mono text-yellow-300 my-2">
-            &omega;0 = &gamma; &times; B0 &nbsp;&nbsp;|&nbsp;&nbsp; For 1H: &gamma; = 42.58 MHz/Tesla
+          <div class="bg-[#12141d] p-4 rounded-xl border border-yellow-500/30">
+            <h4 class="text-yellow-400 font-bold mb-1 text-sm flex items-center"><i class="fa-solid fa-lightbulb mr-2 text-yellow-500"></i>1. Core Intuition</h4>
+            <p class="text-gray-300 text-xs leading-relaxed">Hydrogen protons precess at the Larmor frequency (&omega;0 = &gamma; &times; B0). For Hydrogen, &gamma; = 42.58 MHz/T. At 1.5T: 63.87 MHz; at 3.0T: 127.74 MHz. T1 is spin-lattice longitudinal recovery (fat bright, fluid dark). T2 is spin-spin transverse decay (fluid bright). FLAIR suppresses CSF; STIR suppresses fat.</p>
           </div>
-          <p>At 1.5 Tesla: resonance frequency is 63.87 MHz. At 3.0 Tesla: resonance frequency is 127.74 MHz.</p>
-
-          <h4 class="text-yellow-400 font-bold mt-4 mb-2 text-sm">2. Relaxation Dynamics & Weighting</h4>
-          <ul class="list-disc pl-5 space-y-1 text-gray-300">
-            <li><strong>T1 (Spin-Lattice) Recovery:</strong> Longitudinal magnetization recovers 63% of net value. Short TR and short TE emphasize fat (bright) and water (dark).</li>
-            <li><strong>T2 (Spin-Spin) Decay:</strong> Transverse magnetization decays to 37% due to spin dephasing. Long TR and long TE emphasize fluid (bright CSF and edema).</li>
-          </ul>
-
-          <h4 class="text-yellow-400 font-bold mt-4 mb-2 text-sm">3. ACR MRI Safety Zones</h4>
-          <p><strong>Zone I:</strong> Public access. <strong>Zone II:</strong> Controlled greeting & screening. <strong>Zone III:</strong> Keycard-locked console area (radiographer control). <strong>Zone IV:</strong> The scanner room. Unscreened ferromagnetic objects are strictly prohibited due to deadly projectile missile effect.</p>
+          <div class="bg-[#12141d] p-4 rounded-xl border border-yellow-500/30">
+            <h4 class="text-yellow-400 font-bold mb-2 text-sm flex items-center"><i class="fa-solid fa-shield-halved mr-2 text-yellow-500"></i>2. ACR MRI Safety Zones</h4>
+            <p class="text-xs text-gray-300">Zone I: Public access. Zone II: Supervised screening. Zone III: Keycard-controlled radiographer console. Zone IV: Scanner room (strict prohibition of unscreened ferromagnetic materials to prevent deadly projectile missile accidents).</p>
+          </div>
         `
       },
 
-      // 7. RAD-401: Radiotherapy & Radiobiology
+      // 7. RAD-401
       {
         id: "rad_401",
         stream: "rad",
@@ -576,23 +465,18 @@
         icon: "fa-crosshairs",
         summary: "The 4 Rs of radiobiology, ICRU 50/62 target volumes (GTV/CTV/PTV), LINACs, and ICRP dose limits.",
         content: `
-          <h4 class="text-yellow-400 font-bold mb-2 text-sm">1. The 4 Rs of Radiobiology</h4>
-          <ul class="list-disc pl-5 space-y-1 text-gray-300">
-            <li><strong>Repair:</strong> Normal cells repair sublethal DNA damage faster than malignant cells between daily fractions.</li>
-            <li><strong>Reoxygenation:</strong> Hypoxic core cells become reoxygenated as outer tumor cells die, increasing radiosensitivity (Oxygen Enhancement Ratio - OER).</li>
-            <li><strong>Redistribution:</strong> Cells arrest in the radiosensitive G2/M phases of the cell cycle.</li>
-            <li><strong>Repopulation:</strong> Malignant cells proliferate during extended treatment pauses (fractions must not be delayed).</li>
-          </ul>
-
-          <h4 class="text-yellow-400 font-bold mt-4 mb-2 text-sm">2. Target Volume Hierarchy (ICRU 50 / 62)</h4>
-          <p><strong>GTV (Gross Tumor Volume):</strong> Macroscopically demonstrable tumor extent. <strong>CTV (Clinical Target Volume):</strong> GTV + subclinical microscopic invasion margin. <strong>PTV (Planning Target Volume):</strong> CTV + margins for patient setup variation and internal organ motion.</p>
-
-          <h4 class="text-yellow-400 font-bold mt-4 mb-2 text-sm">3. ICRP Dose Limits</h4>
-          <p>Occupational effective dose limit is <strong>20 mSv per year</strong> averaged over 5 years (no single year > 50 mSv). Public dose limit is <strong>1 mSv per year</strong>.</p>
+          <div class="bg-[#12141d] p-4 rounded-xl border border-yellow-500/30">
+            <h4 class="text-yellow-400 font-bold mb-1 text-sm flex items-center"><i class="fa-solid fa-lightbulb mr-2 text-yellow-500"></i>1. Core Intuition</h4>
+            <p class="text-gray-300 text-xs leading-relaxed">Fractionated radiotherapy exploits biological differences between normal and malignant cells. The 4 Rs: <strong>Repair</strong> (normal cells repair sublethal damage between fractions), <strong>Reoxygenation</strong> (hypoxic tumor cells become oxygenated and 2.5-3x more radiosensitive), <strong>Redistribution</strong> (cells arrest in radiosensitive G2/M phase), <strong>Repopulation</strong> (tumor cells regrow if treatment is delayed).</p>
+          </div>
+          <div class="bg-[#12141d] p-4 rounded-xl border border-yellow-500/30">
+            <h4 class="text-yellow-400 font-bold mb-2 text-sm flex items-center"><i class="fa-solid fa-bullseye mr-2 text-yellow-500"></i>2. ICRU 50/62 Volume Hierarchy</h4>
+            <p class="text-xs text-gray-300"><strong>GTV:</strong> Gross Tumor Volume (visible tumor). <strong>CTV:</strong> Clinical Target Volume (GTV + microscopic spread margin). <strong>PTV:</strong> Planning Target Volume (CTV + setup and motion margin).</p>
+          </div>
         `
       },
 
-      // 8. RAD-402: Quality Assurance & Equipment Testing
+      // 8. RAD-402
       {
         id: "rad_402",
         stream: "rad",
@@ -601,21 +485,22 @@
         icon: "fa-gauge-high",
         summary: "Collimator 8-penny test, Half-Value Layer (HVL), linearity, reproducibility, and CT/MRI calibration phantoms.",
         content: `
-          <h4 class="text-yellow-400 font-bold mb-2 text-sm">1. Diagnostic Radiography QC Tolerances</h4>
-          <ul class="list-disc pl-5 space-y-1 text-gray-300">
-            <li><strong>Collimator / Light Field Alignment:</strong> Must agree within &plusmn;2% of SID (tested via 8-penny test or alignment template).</li>
-            <li><strong>Central Ray Perpendicularity:</strong> Within &plusmn;1 degree of vertical.</li>
-            <li><strong>Exposure Reproducibility:</strong> Coefficient of variation (CV) must not exceed 0.05 (5%) for 10 identical exposures.</li>
-            <li><strong>Exposure Linearity:</strong> mAs reciprocity coefficient of linearity must be within &plusmn;10% across adjacent stations.</li>
-            <li><strong>Timer Accuracy:</strong> Exposures > 10 ms must remain within &plusmn;5% of indicated time.</li>
-          </ul>
-
-          <h4 class="text-yellow-400 font-bold mt-4 mb-2 text-sm">2. Half-Value Layer (HVL) & Filtration</h4>
-          <p>HVL measures beam quality (penetrating power). The minimum total beam filtration for radiographic tubes operating above 70 kVp is <strong>2.5 mm Aluminum equivalent</strong>.</p>
+          <div class="bg-[#12141d] p-4 rounded-xl border border-yellow-500/30">
+            <h4 class="text-yellow-400 font-bold mb-1 text-sm flex items-center"><i class="fa-solid fa-lightbulb mr-2 text-yellow-500"></i>1. Core Intuition</h4>
+            <p class="text-gray-300 text-xs leading-relaxed">Quality control ensures image diagnostic quality while keeping radiation dose ALARA (As Low As Reasonably Achievable). Equipment must pass strict tolerance tests periodically.</p>
+          </div>
+          <div class="bg-[#12141d] p-4 rounded-xl border border-yellow-500/30">
+            <h4 class="text-yellow-400 font-bold mb-2 text-sm flex items-center"><i class="fa-solid fa-ruler mr-2 text-yellow-500"></i>2. QC Standards</h4>
+            <ul class="list-disc pl-5 space-y-1 text-xs text-gray-300">
+              <li><strong>Collimator Alignment:</strong> Within &plusmn;2% of SID (tested with 8-penny test).</li>
+              <li><strong>Exposure Reproducibility:</strong> Coefficient of variation &le; 0.05 (5%).</li>
+              <li><strong>Filtration:</strong> Total filtration &ge; 2.5 mm Al equivalent for tubes operating &gt; 70 kVp.</li>
+            </ul>
+          </div>
         `
       },
 
-      // 9. RAD-403: Healthcare Management & Psychology
+      // 9. RAD-403
       {
         id: "rad_403",
         stream: "rad",
@@ -624,15 +509,14 @@
         icon: "fa-people-roof",
         summary: "HL7/DICOM integration, RIS Modality Worklists, GSDF monitor calibration, claustrophobia mitigation, and trauma crisis de-escalation.",
         content: `
-          <h4 class="text-yellow-400 font-bold mb-2 text-sm">1. Clinical Workflow Architecture: HIS / RIS / PACS</h4>
-          <p>The Hospital Information System (HIS) communicates patient demographics to the Radiology Information System (RIS) via HL7 ADT messages. The RIS generates DICOM Modality Worklists (MWL) for scanners. Acquired studies are transmitted to PACS via DICOM C-STORE and reviewed on calibrated DICOM Part 14 Grayscale Standard Display Function (GSDF) displays.</p>
-
-          <h4 class="text-yellow-400 font-bold mt-4 mb-2 text-sm">2. Claustrophobia Management in MRI</h4>
-          <p>Affects up to 15% of patients. Management: Prone scanning (allowing patient to look out of the bore), wide-bore systems (70 cm), prism mirror glasses, constant 2-way intercom contact, and family accompaniment once metal-screened.</p>
+          <div class="bg-[#12141d] p-4 rounded-xl border border-yellow-500/30">
+            <h4 class="text-yellow-400 font-bold mb-1 text-sm flex items-center"><i class="fa-solid fa-lightbulb mr-2 text-yellow-500"></i>1. Core Intuition</h4>
+            <p class="text-gray-300 text-xs leading-relaxed">HIS/RIS communicates patient data via HL7 messages. The RIS generates DICOM Modality Worklists (MWL) for scanners. Acquired studies transfer to PACS via DICOM C-STORE and are viewed on calibrated DICOM Part 14 Grayscale Standard Display Function (GSDF) displays. Claustrophobia in MRI is mitigated by prone scanning, mirror glasses, wide-bore magnets, and continuous intercom contact.</p>
+          </div>
         `
       },
 
-      // 10. AI-101: Medical Data Science with Python
+      // 10. AI-101
       {
         id: "ai_101",
         stream: "ai",
@@ -642,86 +526,28 @@
         summary: "PyDICOM header parsing, vectorized Hounsfield Unit conversion, clinical windowing math, and SIMD performance optimization.",
         content: `
           <div class="bg-[#12141d] p-4 rounded-xl border border-yellow-500/30">
-            <h4 class="text-yellow-400 font-bold mb-1 text-sm flex items-center">
-              <i class="fa-solid fa-lightbulb mr-2 text-yellow-500"></i>1. Core Intuition (The Plain-English Concept)
-            </h4>
-            <p class="text-gray-300 text-xs leading-relaxed">
-              <strong>A DICOM is Not a Picture:</strong> A <code>.dcm</code> file is an encapsulation of patient metadata, acquisition geometry, and a raw integer array. 
-              Raw detector integers vary by manufacturer; they must be calibrated to <strong>Hounsfield Units (HU)</strong>, where water is 0 HU, air is -1000 HU, and bone is +1000 HU.<br><br>
-              <strong>Why We Window:</strong> Human eyes can only see ~30-50 shades of gray, but CT scanners capture >4000 density levels. 
-              <strong>Windowing</strong> stretches a narrow range of interest (e.g., 0 to 80 HU for brain tissue) across all 256 display grayscales, exposing early ischemic stroke signs that would otherwise be invisible.
-            </p>
+            <h4 class="text-yellow-400 font-bold mb-1 text-sm flex items-center"><i class="fa-solid fa-lightbulb mr-2 text-yellow-500"></i>1. Core Intuition</h4>
+            <p class="text-gray-300 text-xs leading-relaxed">A DICOM file encapsulates metadata and raw pixel values. Raw detector integers must be converted to physical Hounsfield Units (HU) via Rescale Slope and Intercept. Windowing maps a narrow range of HU (e.g. 0 to 80 for brain) to 256 display grayscales to highlight subtle pathologies like stroke.</p>
           </div>
-
           <div class="bg-[#12141d] p-4 rounded-xl border border-yellow-500/30">
-            <h4 class="text-yellow-400 font-bold mb-2 text-sm flex items-center">
-              <i class="fa-solid fa-code mr-2 text-yellow-500"></i>2. Exact Scientific Formulas & Clinical Windows
-            </h4>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-3 font-mono text-[11px]">
-              <div class="bg-black/60 p-2.5 rounded border border-gray-800">
-                <span class="text-yellow-400 font-bold">Pixel to HU Calibration:</span><br/>
-                HU = (Pixel &times; RescaleSlope) + RescaleIntercept
-              </div>
-              <div class="bg-black/60 p-2.5 rounded border border-gray-800">
-                <span class="text-yellow-400 font-bold">Windowing Bounds:</span><br/>
-                Lower = WL - (WW / 2)<br/>
-                Upper = WL + (WW / 2)
-              </div>
-            </div>
-            <div class="mt-3 text-xs text-gray-300">
-              <span class="text-yellow-400 font-bold">Standard Clinical Presets:</span>
-              <ul class="list-disc pl-5 mt-1 space-y-0.5 text-[11px]">
-                <li><strong>Brain (Stroke):</strong> WL: +40, WW: 80 (Range: 0 to 80 HU)</li>
-                <li><strong>Bone:</strong> WL: +400, WW: 1500 (Range: -350 to +1150 HU)</li>
-                <li><strong>Lung:</strong> WL: -600, WW: 1500 (Range: -1350 to +150 HU)</li>
-                <li><strong>Soft Tissue:</strong> WL: +50, WW: 350 (Range: -125 to +225 HU)</li>
-              </ul>
-            </div>
-          </div>
+            <h4 class="text-yellow-400 font-bold mb-2 text-sm flex items-center"><i class="fa-solid fa-code mr-2 text-yellow-500"></i>2. Vectorized Python Code</h4>
+            <pre class="bg-black/80 p-2.5 rounded text-yellow-300 font-mono text-[11px] overflow-x-auto">
+import pydicom, numpy as np
 
-          <div class="bg-[#12141d] p-4 rounded-xl border border-yellow-500/30">
-            <h4 class="text-yellow-400 font-bold mb-2 text-sm flex items-center">
-              <i class="fa-solid fa-terminal mr-2 text-yellow-500"></i>3. Production-Grade Vectorized Code
-            </h4>
-            <pre class="bg-black/80 p-3 rounded border border-yellow-500/20 text-yellow-300 font-mono text-[11px] overflow-x-auto">
-import pydicom
-import numpy as np
-
-def load_and_window_dicom(filepath, wl=40.0, ww=80.0):
-    # 1. Read DICOM
+def load_and_window(filepath, wl=40.0, ww=80.0):
     ds = pydicom.dcmread(filepath)
-    
-    # 2. Prevent uint16 underflow by casting to float32
-    raw = ds.pixel_array.astype(np.float32)
-    
-    # 3. Vectorized HU conversion
+    raw = ds.pixel_array.astype(np.float32) # prevent uint16 underflow
     slope = float(getattr(ds, 'RescaleSlope', 1.0))
     intercept = float(getattr(ds, 'RescaleIntercept', 0.0))
     hu = (raw * slope) + intercept
-    
-    # 4. Vectorized window clipping
-    lower = wl - (ww / 2.0)
-    upper = wl + (ww / 2.0)
+    lower, upper = wl - (ww / 2.0), wl + (ww / 2.0)
     windowed = np.clip(hu, lower, upper)
-    
-    # 5. Normalize to 0.0 - 1.0 float tensor
-    normalized = (windowed - lower) / (upper - lower)
-    return normalized</pre>
-          </div>
-
-          <div class="bg-[#12141d] p-4 rounded-xl border border-rose-500/30">
-            <h4 class="text-rose-400 font-bold mb-2 text-sm flex items-center">
-              <i class="fa-solid fa-triangle-exclamation mr-2 text-rose-500"></i>4. Common Traps & Programming Pitfalls
-            </h4>
-            <ul class="list-disc pl-5 space-y-1.5 text-xs text-gray-300">
-              <li><strong>The uint16 Underflow Disaster:</strong> Raw DICOM pixels are stored as unsigned 16-bit integers (<code>uint16</code>). If <code>RescaleIntercept</code> is -1024, calculating <code>pixel + (-1024)</code> on a <code>uint16</code> array causes integer underflow wraparound (<code>0 - 1024 = 64512</code>). Always cast to <code>np.float32</code> first!</li>
-              <li><strong>The Python For-Loop Slowness:</strong> Iterating over a 512x512x200 volume with nested Python loops takes ~10 seconds. NumPy SIMD vectorization executes in 3 milliseconds (~3,000&times; faster).</li>
-            </ul>
+    return (windowed - lower) / (upper - lower)</pre>
           </div>
         `
       },
 
-      // 11. AI-201: Healthcare Relational SQL & Dose Registries
+      // 11. AI-201
       {
         id: "ai_201",
         stream: "ai",
@@ -730,25 +556,28 @@ def load_and_window_dicom(filepath, wl=40.0, ww=80.0):
         icon: "fa-database",
         summary: "Complex joins, window ranking functions, and automated cumulative CT dose tracking against national DRL thresholds.",
         content: `
-          <h4 class="text-yellow-400 font-bold mb-2 text-sm">1. Radiation Dose Tracking via SQL Window Functions</h4>
-          <p>Querying patient populations exceeding national Diagnostic Reference Levels (DRLs) across multiple imaging encounters:</p>
-          <pre class="bg-black/80 p-3 rounded border border-yellow-500/20 text-yellow-300 font-mono text-[11px] overflow-x-auto">
-SELECT 
-    p.mrn,
-    p.full_name,
-    COUNT(s.study_uid) AS total_ct_examinations,
-    SUM(s.dlp_mgy_cm) AS cumulative_dlp,
-    ROUND(AVG(s.dlp_mgy_cm), 2) AS mean_scan_dlp,
-    RANK() OVER (ORDER BY SUM(s.dlp_mgy_cm) DESC) AS dose_cohort_rank
-FROM clinical_patients p
-JOIN ct_radiation_events s ON p.patient_id = s.patient_id
-WHERE s.acquisition_timestamp >= NOW() - INTERVAL '12 MONTH'
-GROUP BY p.mrn, p.full_name
-HAVING SUM(s.dlp_mgy_cm) > 1500; -- Diagnostic Reference Level threshold</pre>
+          <div class="bg-[#12141d] p-4 rounded-xl border border-yellow-500/30">
+            <h4 class="text-yellow-400 font-bold mb-1 text-sm flex items-center"><i class="fa-solid fa-lightbulb mr-2 text-yellow-500"></i>1. Core Intuition</h4>
+            <p class="text-gray-300 text-xs leading-relaxed">Healthcare databases track longitudinal patient encounters and radiation exposure. Using SQL window functions (OVER, PARTITION BY, DENSE_RANK), clinical systems track cumulative Dose-Length Product (DLP) across multiple CT scans and automatically flag patients exceeding Diagnostic Reference Levels (DRLs).</p>
+          </div>
+          <div class="bg-[#12141d] p-4 rounded-xl border border-yellow-500/30">
+            <h4 class="text-yellow-400 font-bold mb-2 text-sm flex items-center"><i class="fa-solid fa-database mr-2 text-yellow-500"></i>2. Production SQL Query</h4>
+            <pre class="bg-black/80 p-2.5 rounded text-yellow-300 font-mono text-[11px] overflow-x-auto">
+SELECT p.mrn, p.first_name || ' ' || p.last_name AS name,
+       COUNT(s.study_id) AS total_scans,
+       ROUND(SUM(r.dlp_mgy_cm)::numeric, 2) AS cumulative_dlp,
+       DENSE_RANK() OVER (ORDER BY SUM(r.dlp_mgy_cm) DESC) AS rank
+FROM patients p
+JOIN imaging_studies s ON p.patient_id = s.patient_id
+JOIN ct_dose_events r ON s.study_id = r.study_id
+WHERE s.study_date >= CURRENT_DATE - INTERVAL '12 MONTH'
+GROUP BY p.patient_id, p.mrn, p.first_name, p.last_name
+HAVING SUM(r.dlp_mgy_cm) > 1500;</pre>
+          </div>
         `
       },
 
-      // 12. AI-301: Machine Learning in Diagnostics
+      // 12. AI-301
       {
         id: "ai_301",
         stream: "ai",
@@ -757,22 +586,14 @@ HAVING SUM(s.dlp_mgy_cm) > 1500; -- Diagnostic Reference Level threshold</pre>
         icon: "fa-brain",
         summary: "Sensitivity vs. Specificity tradeoffs, ROC-AUC analysis, and handling severe clinical class imbalance with Focal Loss.",
         content: `
-          <h4 class="text-yellow-400 font-bold mb-2 text-sm">1. Medical Diagnostic Metrics</h4>
-          <ul class="list-disc pl-5 space-y-1 text-gray-300">
-            <li><strong>Sensitivity (Recall):</strong> <code>TP / (TP + FN)</code>. In screening mammography, missed cancers are catastrophic; high sensitivity is mandatory.</li>
-            <li><strong>Specificity:</strong> <code>TN / (TN + FP)</code>. Minimizes false positives and unnecessary invasive biopsies.</li>
-            <li><strong>ROC-AUC:</strong> Measures discrimination across all classification thresholds (>0.90 indicates high clinical fidelity).</li>
-          </ul>
-
-          <h4 class="text-yellow-400 font-bold mt-4 mb-2 text-sm">2. Handling Extreme Class Imbalance: Focal Loss</h4>
-          <p>In medical datasets, lesions often comprise < 2% of samples. Standard cross-entropy is overwhelmed by easy negative background pixels. <strong>Focal Loss</strong> applies a dynamic modulating factor <code>(1 - pt)^&gamma;</code> to down-weight easy examples:</p>
-          <div class="bg-black/60 p-2.5 rounded border border-yellow-500/20 font-mono text-yellow-300 my-2">
-            FL(pt) = -&alpha;t &times; (1 - pt)^&gamma; &times; log(pt) &nbsp;&nbsp;(typically &gamma;=2, &alpha;=0.25)
+          <div class="bg-[#12141d] p-4 rounded-xl border border-yellow-500/30">
+            <h4 class="text-yellow-400 font-bold mb-1 text-sm flex items-center"><i class="fa-solid fa-lightbulb mr-2 text-yellow-500"></i>1. Core Intuition</h4>
+            <p class="text-gray-300 text-xs leading-relaxed">Medical ML requires high Sensitivity (Recall = TP / (TP + FN)) so that cancers or strokes are never missed. Because pathologies are rare in medical datasets (&lt; 2%), standard cross-entropy fails. Focal Loss adds a modulating factor (1 - pt)^&gamma; that down-weights easy background examples and forces the model to learn rare lesions.</p>
           </div>
         `
       },
 
-      // 13. AI-401: Deep Learning & 3D U-Nets
+      // 13. AI-401
       {
         id: "ai_401",
         stream: "ai",
@@ -781,18 +602,14 @@ HAVING SUM(s.dlp_mgy_cm) > 1500; -- Diagnostic Reference Level threshold</pre>
         icon: "fa-network-wired",
         summary: "Encoder-decoder topologies, skip connections, 3D volumetric convolutions, Dice loss, and Grad-CAM explainability.",
         content: `
-          <h4 class="text-yellow-400 font-bold mb-2 text-sm">1. 3D U-Net Architecture in Medical Segmentation</h4>
-          <p>Medical image segmentation relies on the U-Net architecture. It features a contracting encoder path (extracting contextual features) and a symmetric expanding decoder path (restoring spatial resolution), connected by <strong>skip connections</strong> that feed high-resolution anatomical coordinates directly across layers.</p>
-
-          <h4 class="text-yellow-400 font-bold mt-4 mb-2 text-sm">2. The Dice Similarity Coefficient (DSC)</h4>
-          <div class="bg-black/60 p-2.5 rounded border border-yellow-500/20 font-mono text-yellow-300 my-2">
-            DSC = (2 &times; |A &cap; B|) / (|A| + |B|) &nbsp;&nbsp;|&nbsp;&nbsp; Dice Loss = 1 - DSC
+          <div class="bg-[#12141d] p-4 rounded-xl border border-yellow-500/30">
+            <h4 class="text-yellow-400 font-bold mb-1 text-sm flex items-center"><i class="fa-solid fa-lightbulb mr-2 text-yellow-500"></i>1. Core Intuition</h4>
+            <p class="text-gray-300 text-xs leading-relaxed">3D U-Net is the industry standard for anatomical segmentation. Skip connections pass high-resolution spatial feature maps directly from the contracting encoder to the expanding decoder, preserving fine anatomical boundaries. The Dice Similarity Coefficient (DSC = 2|A &cap; B| / (|A| + |B|)) measures volumetric overlap directly.</p>
           </div>
-          <p>Directly measures voxel overlap between predicted contour A and ground-truth contour B. Insensitive to background class dominance.</p>
         `
       },
 
-      // 14. AI-402: Clinical Automation & DICOMweb
+      // 14. AI-402
       {
         id: "ai_402",
         stream: "ai",
@@ -801,15 +618,10 @@ HAVING SUM(s.dlp_mgy_cm) > 1500; -- Diagnostic Reference Level threshold</pre>
         icon: "fa-robot",
         summary: "WADO-RS, QIDO-RS, STOW-RS, HL7 FHIR DiagnosticReport payloads, and TensorRT edge deployment.",
         content: `
-          <h4 class="text-yellow-400 font-bold mb-2 text-sm">1. RESTful DICOMweb Microservices</h4>
-          <ul class="list-disc pl-5 space-y-1 text-gray-300">
-            <li><strong>WADO-RS:</strong> Retrieve full DICOM instances, series, or raw pixel data via HTTP GET requests.</li>
-            <li><strong>QIDO-RS:</strong> Query studies and series using RESTful URL parameters.</li>
-            <li><strong>STOW-RS:</strong> Upload AI segmentation masks and DICOM Structured Reports (SR) via HTTP POST multipart MIME.</li>
-          </ul>
-
-          <h4 class="text-yellow-400 font-bold mt-4 mb-2 text-sm">2. Interoperability with HL7 FHIR</h4>
-          <p>Model predictions encapsulate as a FHIR <code>DiagnosticReport</code> resource, cross-referencing an <code>ImagingStudy</code> and individual quantitative <code>Observation</code> entities.</p>
+          <div class="bg-[#12141d] p-4 rounded-xl border border-yellow-500/30">
+            <h4 class="text-yellow-400 font-bold mb-1 text-sm flex items-center"><i class="fa-solid fa-lightbulb mr-2 text-yellow-500"></i>1. Core Intuition</h4>
+            <p class="text-gray-300 text-xs leading-relaxed">DICOMweb replaces legacy binary protocols with RESTful HTTP services: WADO-RS retrieves images, QIDO-RS queries studies, and STOW-RS stores AI findings. Results are shared with electronic health records as HL7 FHIR DiagnosticReport JSON resources.</p>
+          </div>
         `
       }
     ];
@@ -978,14 +790,12 @@ HAVING SUM(s.dlp_mgy_cm) > 1500; -- Diagnostic Reference Level threshold</pre>
     let quizScore = 0;
     let quizAnswered = false;
 
-    // DOM Initialization
     document.addEventListener("DOMContentLoaded", () => {
       renderCourses();
       loadCard();
       loadQuiz();
     });
 
-    // Tab Switching
     function switchTab(tab) {
       const tabs = ['curriculum', 'arena', 'convergence'];
       tabs.forEach(t => {
@@ -998,7 +808,6 @@ HAVING SUM(s.dlp_mgy_cm) > 1500; -- Diagnostic Reference Level threshold</pre>
       document.getElementById(`tab-${tab}`).classList.remove('text-gray-400');
     }
 
-    // Render Course Cards
     function renderCourses() {
       const grid = document.getElementById("course-grid");
       const search = document.getElementById("courseSearch").value.toLowerCase();
@@ -1048,7 +857,6 @@ HAVING SUM(s.dlp_mgy_cm) > 1500; -- Diagnostic Reference Level threshold</pre>
       renderCourses();
     }
 
-    // Modal Controller
     function openModal(courseId) {
       const course = courses.find(c => c.id === courseId);
       if (!course) return;
@@ -1063,7 +871,6 @@ HAVING SUM(s.dlp_mgy_cm) > 1500; -- Diagnostic Reference Level threshold</pre>
       document.getElementById("course-modal").classList.add("hidden");
     }
 
-    // Flashcard Controller
     function loadCard() {
       const card = flashcards[cardIndex];
       const inner = document.getElementById("flashcard-inner");
@@ -1095,7 +902,6 @@ HAVING SUM(s.dlp_mgy_cm) > 1500; -- Diagnostic Reference Level threshold</pre>
       loadCard();
     }
 
-    // Diagnostic Quiz Controller
     function loadQuiz() {
       quizAnswered = false;
       const q = quizQuestions[quizIndex];
@@ -1140,7 +946,6 @@ HAVING SUM(s.dlp_mgy_cm) > 1500; -- Diagnostic Reference Level threshold</pre>
       loadQuiz();
     }
 
-    // Convergence Simulator
     function runConvergenceSim() {
       const pipeline = document.getElementById("conv-pipeline").value;
       const backend = document.getElementById("conv-backend").value;
